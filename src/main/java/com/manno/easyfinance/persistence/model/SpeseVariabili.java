@@ -1,8 +1,8 @@
 package com.manno.easyfinance.persistence.model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.AbstractMap;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -10,10 +10,10 @@ public class SpeseVariabili {
 
     private String nomeConto;
     private double amount;
-    private LocalDate data;
+    private Date gg;
     private int id;
     private String descrizione;
-    private Map.Entry<String, Integer> chiave;
+    private AbstractMap.SimpleEntry<String, Integer> chiave;
 
 
     public void setId(int id) {
@@ -21,11 +21,19 @@ public class SpeseVariabili {
         this.chiave = new AbstractMap.SimpleEntry<String,Integer>(this.nomeConto, this.id);
     }
 
-    public SpeseVariabili(String nomeConto, double amount, LocalDate data, String descrizione) {
+    public SpeseVariabili(String nomeConto, double amount, Date gg, String descrizione) {
         this.nomeConto = nomeConto;
         this.amount = amount;
-        this.data = data;
+        this.gg = gg;
         this.descrizione = descrizione;
+    }
+
+    public SpeseVariabili(String nomeConto, double amount, Date gg, String descrizione, int id) {
+        this.nomeConto = nomeConto;
+        this.amount = amount;
+        this.gg = gg;
+        this.descrizione = descrizione;
+        this.setId(id);
     }
 
     @Override
@@ -46,7 +54,7 @@ public class SpeseVariabili {
         return "SpeseVariabili{" +
                 "nomeConto='" + nomeConto + '\'' +
                 ", amount=" + amount +
-                ", data=" + data +
+                ", gg=" + gg +
                 ", id=" + id +
                 ", descrizione='" + descrizione + '\'' +
                 ", chiave=" + chiave +
@@ -69,12 +77,12 @@ public class SpeseVariabili {
         this.amount = amount;
     }
 
-    public LocalDate getData() {
-        return data;
+    public Date getData() {
+        return gg;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public void setData(Date gg) {
+        this.gg = gg;
     }
 
     public int getId() {
@@ -87,5 +95,9 @@ public class SpeseVariabili {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    public AbstractMap.SimpleEntry<String, Integer> getChiave() {
+        return chiave;
     }
 }

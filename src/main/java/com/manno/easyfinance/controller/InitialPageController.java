@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -46,7 +48,7 @@ public class InitialPageController {
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() throws IOException{
 
         accounts=FXCollections.observableArrayList();
         accountsName=FXCollections.observableArrayList();
@@ -54,6 +56,14 @@ public class InitialPageController {
 
         ContextMenu contextMenu = new ContextMenu();
         MenuItem editItem = new MenuItem("Edit");
+
+        accountListView.setOnMouseClicked(event -> {
+            try {
+                handleMouseClick(event);
+            } catch (IOException | SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         editItem.setOnAction(event -> {
             String selectedItem = accountListView.getSelectionModel().getSelectedItem();
@@ -71,6 +81,28 @@ public class InitialPageController {
         accountListView.setOnContextMenuRequested(event -> {
             contextMenu.show(accountListView, event.getScreenX(), event.getScreenY());
         });
+
+    }
+
+    private void handleMouseClick(MouseEvent event) throws IOException, SQLException {
+        if (event.getButton() == MouseButton.PRIMARY) {
+            String selectedItem = accountListView.getSelectionModel().getSelectedItem();
+            if (selectedItem != null) {
+                handleLeftClick(selectedItem);
+            }
+        }
+    }
+
+    private void handleLeftClick(String selectedItem) throws IOException, SQLException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("detailedPage.fxml"));
+        AnchorPane newPage =fxmlLoader.load();
+
+        DetailedPageController controller=fxmlLoader.getController();
+
+        wrapper.getChildren().clear();
+        wrapper.getChildren().add(newPage);
+        controller.initDataSource(dataSource,selectedItem);
 
     }
 

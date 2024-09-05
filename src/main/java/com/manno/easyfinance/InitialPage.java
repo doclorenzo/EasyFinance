@@ -1,9 +1,11 @@
 package com.manno.easyfinance;
 
 import com.manno.easyfinance.controller.InitialPageController;
+import com.manno.easyfinance.persistence.TableSpeseVariabiliHandler;
 import com.manno.easyfinance.persistence.dao.AccountRepository;
 import com.manno.easyfinance.persistence.dao.SpeseFisseRepository;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,6 +14,8 @@ import org.postgresql.ds.PGSimpleDataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
+
+import static com.manno.easyfinance.persistence.staticTableFiller.getDataForTable;
 
 public class InitialPage extends Application {
 
