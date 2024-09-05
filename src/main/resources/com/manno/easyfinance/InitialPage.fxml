@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="giga" prefHeight="700.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manno.easyfinance.controller.InitialPageController">
+   <children>
+      <SplitPane dividerPositions="0.21660305343511452" layoutX="106.0" layoutY="121.0" prefHeight="700.0" prefWidth="1050.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <VBox layoutX="43.0" layoutY="161.0" prefHeight="698.0" prefWidth="521.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="account" alignment="CENTER" onMouseClicked="#handleAccount" prefHeight="37.0" prefWidth="224.0" text="Accounts" />
+                        <ListView fx:id="accountListView" prefHeight="670.0" prefWidth="224.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <SplitPane prefHeight="31.0" prefWidth="818.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <items>
+                        <VBox>
+                           <children>
+                              <ButtonBar prefHeight="61.0" prefWidth="816.0">
+                                <buttons>
+                                  <Button fx:id="createNew" mnemonicParsing="false" onAction="#handleCreateNew" prefHeight="25.0" prefWidth="444.0" text="Create new Account..." />
+                                    <Button fx:id="delete" cancelButton="true" mnemonicParsing="false" onAction="#handleDialogDelete" text="Delete Account..." />
+                                </buttons>
+                                 <padding>
+                                    <Insets right="15.0" />
+                                 </padding>
+                              </ButtonBar>
+                           </children>
+                        </VBox>
+                     </items>
+                  </SplitPane>
+                  <VBox layoutY="31.0" prefHeight="669.0" prefWidth="818.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
+                     <children>
+                        <VBox fx:id="wrapper">
+                           <children>
+                              <TextArea fx:id="welcome" editable="false" prefHeight="682.0" prefWidth="818.0" text="&#10;             &#10;             WELCOME TO&#10;            EASY FINANCE!">
+                                 <font>
+                                    <Font size="55.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                                 <effect>
+                                    <Blend />
+                                 </effect>
+                              </TextArea>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
