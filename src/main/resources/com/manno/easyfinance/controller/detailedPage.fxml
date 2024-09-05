@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="669.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manno.easyfinance.controller.DetailedPageController">
+   <children>
+      <Label layoutX="30.0" layoutY="36.0" text="Nome Conto" />
+      <TableView layoutX="30.0" layoutY="80.0" prefHeight="544.0" prefWidth="294.0">
+        <columns>
+          <TableColumn prefWidth="87.0" text="Mese" />
+          <TableColumn prefWidth="102.0" text="Spese" />
+            <TableColumn prefWidth="105.0" text="Bilancio" />
+        </columns>
+      </TableView>
+      <TableView layoutX="346.0" layoutY="80.0" prefHeight="269.0" prefWidth="197.0">
+        <columns>
+          <TableColumn prefWidth="93.0" text="Descrizione" />
+          <TableColumn prefWidth="103.0" text="Spese" />
+        </columns>
+      </TableView>
+      <Button layoutX="346.0" layoutY="349.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="197.0" text="Aggiungi" />
+      <Label layoutX="390.0" layoutY="53.0" text="Spese del xx/xx/xx" />
+      <Button layoutX="125.0" layoutY="32.0" mnemonicParsing="false" text="Deposita" />
+      <Label layoutX="353.0" layoutY="399.0" text="Informazioni sul conto:" />
+   </children>
+</AnchorPane>
