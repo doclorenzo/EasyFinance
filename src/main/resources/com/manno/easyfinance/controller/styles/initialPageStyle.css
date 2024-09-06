@@ -1,0 +1,88 @@
+/* Tema scuro generale */
+.root {
+    -fx-background-color: #2e2e2e;
+    -fx-font-family: 'Arial', sans-serif;
+    -fx-text-fill: #ffffff;
+}
+
+/* Stile della ButtonBar */
+.button-bar {
+    -fx-background-color: #3c3c3c;
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+}
+
+/* Stile per i pulsanti */
+.button {
+    -fx-background-color: #4c4c4c;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: #5a5a5a;
+    -fx-border-width: 1px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #6c6c6c;
+}
+
+.button:pressed {
+    -fx-background-color: #5c5c5c;
+}
+
+/* Stile per la Label cliccabile */
+.label {
+
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-color: black;
+}
+
+/* Stile della ListView */
+.list-view {
+    -fx-background-color: #3c3c3c;
+    -fx-border-color: #4a4a4a;
+    -fx-control-inner-background: #3c3c3c;
+    -fx-control-inner-background-alt: #333333;
+    -fx-cell-hover-color: #4a4a4a;
+    -fx-cell-focus-inner-border: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+}
+
+/* Stile degli elementi della ListView */
+.list-cell {
+    -fx-background-color: #3c3c3c;
+    -fx-text-fill: #ffffff;
+}
+
+.list-cell:hover {
+    -fx-background-color: #5c5c5c;
+}
+
+.list-cell:selected {
+    -fx-background-color: #007acc;
+    -fx-text-fill: #ffffff;
+}
+
+/* Stile della TextArea */
+.text-area {
+    -fx-background-color: #3c3c3c;
+    -fx-font-size: 55px;
+    -fx-font-weight: bold;
+    -fx-padding: 20px;
+    -fx-color: black;
+}
+
+.text-area:focused {
+    -fx-border-color: #007acc;
+}
+
+.text-area .content {
+    -fx-text-fill: #ffffff;
+}

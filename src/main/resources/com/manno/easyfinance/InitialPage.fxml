@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="giga" prefHeight="700.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manno.easyfinance.controller.InitialPageController">
+<AnchorPane fx:id="giga" prefHeight="700.0" prefWidth="1050.0" style="-fx-border-color: transparent;" stylesheets="@controller/styles/initialPageStyle.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manno.easyfinance.controller.InitialPageController">
    <children>
       <SplitPane dividerPositions="0.21660305343511452" layoutX="106.0" layoutY="121.0" prefHeight="700.0" prefWidth="1050.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -21,8 +21,8 @@
                <children>
                   <VBox layoutX="43.0" layoutY="161.0" prefHeight="698.0" prefWidth="521.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label fx:id="account" alignment="CENTER" onMouseClicked="#handleAccount" prefHeight="37.0" prefWidth="224.0" text="Accounts" />
-                        <ListView fx:id="accountListView" prefHeight="670.0" prefWidth="224.0" />
+                        <Label fx:id="account" alignment="CENTER" onMouseClicked="#handleAccount" prefHeight="37.0" prefWidth="224.0" style="-fx-background-color: white;" text="Accounts" />
+                        <ListView fx:id="accountListView" prefHeight="666.0" prefWidth="243.0" />
                      </children>
                   </VBox>
                </children>
@@ -31,9 +31,9 @@
                <children>
                   <SplitPane prefHeight="31.0" prefWidth="818.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <items>
-                        <VBox>
+                        <VBox prefHeight="157.0" prefWidth="816.0">
                            <children>
-                              <ButtonBar prefHeight="61.0" prefWidth="816.0">
+                              <ButtonBar prefHeight="60.0" prefWidth="827.0" style="-fx-border-color: transparent;">
                                 <buttons>
                                   <Button fx:id="createNew" mnemonicParsing="false" onAction="#handleCreateNew" prefHeight="25.0" prefWidth="444.0" text="Create new Account..." />
                                     <Button fx:id="delete" cancelButton="true" mnemonicParsing="false" onAction="#handleDialogDelete" text="Delete Account..." />
@@ -46,11 +46,11 @@
                         </VBox>
                      </items>
                   </SplitPane>
-                  <VBox layoutY="31.0" prefHeight="669.0" prefWidth="818.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
+                  <VBox layoutY="31.0" prefHeight="669.0" prefWidth="818.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0">
                      <children>
-                        <VBox fx:id="wrapper">
+                        <VBox fx:id="wrapper" prefHeight="669.0" style="-fx-border-color: transparent;">
                            <children>
-                              <TextArea fx:id="welcome" editable="false" prefHeight="682.0" prefWidth="818.0" text="&#10;             &#10;             WELCOME TO&#10;            EASY FINANCE!">
+                              <TextArea fx:id="welcome" editable="false" prefHeight="643.0" prefWidth="653.0" style="-fx-border-radius: 0; -fx-border-color: transparent;" text="&#10;             &#10;             WELCOME TO&#10;            EASY FINANCE!">
                                  <font>
                                     <Font size="55.0" />
                                  </font>

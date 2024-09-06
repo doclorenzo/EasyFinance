@@ -1,8 +1,6 @@
 package com.manno.easyfinance;
 
 import com.manno.easyfinance.controller.InitialPageController;
-import com.manno.easyfinance.persistence.dao.AccountRepository;
-import com.manno.easyfinance.persistence.model.Account;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.postgresql.ds.PGSimpleDataSource;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 
 public class InitialPage extends Application {
@@ -30,13 +27,11 @@ public class InitialPage extends Application {
         stage.show();
     }
 
-
     private static PGSimpleDataSource createDataSource(){
         final PGSimpleDataSource dataSource = new PGSimpleDataSource();
         dataSource.setUrl(InitialPage.JDBC_URL);
         return dataSource;
     }
-
 
     public static void main(String[] args) {
         launch(args);

@@ -11,7 +11,7 @@
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="75.0" prefWidth="390.0">
          <children>
             <TextField fx:id="input" layoutX="206.0" layoutY="37.0" />
-            <Label layoutX="25.0" layoutY="41.0" text="Nome Conto da eliminare" />
+            <Label fx:id="label" layoutX="25.0" layoutY="41.0" text="Nome Conto da eliminare" />
          </children></AnchorPane>
     </header>
     <content>

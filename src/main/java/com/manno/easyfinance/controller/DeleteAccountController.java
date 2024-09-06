@@ -1,11 +1,13 @@
 package com.manno.easyfinance.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class DeleteAccountController {
 
     @FXML private TextField input;
+    @FXML private Label label;
     String nomeCDel;
 
     @FXML
@@ -15,6 +17,10 @@ public class DeleteAccountController {
 
     public String getNomeCDel(){
         return nomeCDel;
+    }
+
+    public void setLabel(String text){
+        label.setText(text);
     }
 
 }

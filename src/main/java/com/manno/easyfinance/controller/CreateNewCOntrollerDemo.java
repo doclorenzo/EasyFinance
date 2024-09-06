@@ -45,9 +45,9 @@ public class CreateNewCOntrollerDemo extends AbstractNewEdit{
         }
     }
 
-    @Override
+    @FXML
     public Account handleSubmit() throws SQLException, IOException {
-        Account newAccount=super.handleSubmit();
+        Account newAccount=super.handleSubmitAbstract(0);
         accounts.add(newAccount.getNomeConto());
         showAutoDismissAlert(parentController.getGiga(),"Account creato con successo", Color.DARKGREEN);
         parentController.handleAccount();

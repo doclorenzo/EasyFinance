@@ -37,7 +37,7 @@ public class EditAccountController extends AbstractNewEdit{
         conto.setText(nameConto);
     }
 
-    @Override
+    @FXML
     public Account handleSubmit() throws SQLException, IOException {
 
         for(SpeseFisse x: prexist){
@@ -45,7 +45,7 @@ public class EditAccountController extends AbstractNewEdit{
                 saveNewSpeseFisseList.deleteById(x.getChiave());
             }
         }
-         Account n=super.handleSubmit();
+        Account n=super.handleSubmitAbstract(saveNewAccount.findById(nameConto).get().getBilancio());
         showAutoDismissAlert(parentController.getGiga(),"Account modificato con successo", Color.DARKGREEN);
         parentController.handleAccount();
         return n;

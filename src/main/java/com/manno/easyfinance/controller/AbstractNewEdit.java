@@ -105,11 +105,11 @@ public abstract class AbstractNewEdit {
         return spesaTable;
     }
 
-    @FXML
-    public Account handleSubmit() throws SQLException, IOException{
+
+    public Account handleSubmitAbstract(double bil) throws SQLException, IOException{
         Account newAccount;
         if(!monthlyIncomeFiled.getText().isEmpty()){
-            newAccount = new Account(nameConto, Double.parseDouble(monthlyIncomeFiled.getText()), 0);
+            newAccount = new Account(nameConto, Double.parseDouble(monthlyIncomeFiled.getText()), bil);
             saveNewAccount=new AccountRepository(dataSource);
             saveNewAccount.save(newAccount);
             saveNewSpeseFisseList=new SpeseFisseRepository(dataSource);
