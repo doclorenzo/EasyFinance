@@ -13,4 +13,6 @@ module com.manno.easyfinance {
     opens com.manno.easyfinance.controller to javafx.fxml;
     exports com.manno.easyfinance.persistence.model;
     opens com.manno.easyfinance.persistence.model to javafx.fxml;
+    exports com.manno.easyfinance.controller.DeatiledTableManager;
+    opens com.manno.easyfinance.controller.DeatiledTableManager to javafx.fxml;
 }

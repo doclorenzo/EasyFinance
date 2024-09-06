@@ -49,12 +49,11 @@ public abstract class AbstractNewEdit {
         spesaColAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         speseFisseObservableList = FXCollections.observableArrayList();
         spesaTable.setItems(speseFisseObservableList);
+
         spesaTable.setOnMouseClicked(event -> {
             if (event.getClickCount() == 1) { // Single click
-                // Get the selected item
                 SpeseFisse selectedSpesa = spesaTable.getSelectionModel().getSelectedItem();
                 if (selectedSpesa != null) {
-                    // Remove the selected item from the data model
                     speseFisseObservableList.remove(selectedSpesa);
                 }
             }

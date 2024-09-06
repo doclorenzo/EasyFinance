@@ -102,7 +102,7 @@ public class InitialPageController {
 
         wrapper.getChildren().clear();
         wrapper.getChildren().add(newPage);
-        controller.initDataSource(dataSource,selectedItem);
+        controller.initDataSource(dataSource,selectedItem,accountRepository.findById(selectedItem).get());
 
     }
 

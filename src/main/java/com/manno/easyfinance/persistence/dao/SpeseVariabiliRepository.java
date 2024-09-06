@@ -26,7 +26,7 @@ public class SpeseVariabiliRepository implements Repository<SpeseVariabili, Abst
              PreparedStatement statement = connection.prepareStatement(sql)) {
              statement.executeQuery();
         } catch (SQLException e) {
-            throw new SQLException("table Account doesn't exists or not populated");
+            throw new SQLException("table SpeseVariabili doesn't exists or not populated");
         }
     }
 
@@ -86,7 +86,7 @@ public class SpeseVariabiliRepository implements Repository<SpeseVariabili, Abst
             statement.setString(1, entity.getNomeConto());
             statement.setString(2, entity.getDescrizione());
             statement.setDouble(3, entity.getAmount());
-            statement.setDate(3, entity.getData());
+            statement.setDate(4, entity.getData());
             statement.executeUpdate();
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -149,12 +149,13 @@ public class SpeseVariabiliRepository implements Repository<SpeseVariabili, Abst
         }
     }
 
-    public ObservableList<SpeseVariabili> findBynomeConto(String nomeConto){
-        String sql = "SELECT * FROM SpeseVariabili WHERE nomeConto=?";
+    public ObservableList<SpeseVariabili> findBynomeContoandDate(String nomeConto, java.sql.Date data){
+        String sql = "SELECT * FROM SpeseVariabili WHERE nomeConto=? AND gg=?";
         ObservableList<SpeseVariabili> ret= FXCollections.observableArrayList();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, nomeConto);
+            statement.setDate(2, data);
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
                 ret.add(new SpeseVariabili(nomeConto, rs.getDouble("amount"), rs.getDate("gg"), rs.getString("descrizione"), rs.getInt("id")));

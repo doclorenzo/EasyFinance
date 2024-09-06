@@ -40,7 +40,7 @@ public class AccountRepository implements Repository<Account,String>{
                 return Optional.empty();
             }
 
-            return Optional.of(new Account(rs.getString("nomeConto"), rs.getDouble("monthlyIncome"), rs.getDouble("bilancio")));
+            return Optional.of(new Account(rs.getString("nomeConto"), rs.getDouble("monthlyIncome"), rs.getDouble("bilancio"), rs.getDate("dataCreazione")));
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -54,7 +54,7 @@ public class AccountRepository implements Repository<Account,String>{
              PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                accountList.add(new Account(rs.getString("nomeConto"), rs.getDouble("monthlyIncome"), rs.getDouble("bilancio")));
+                accountList.add(new Account(rs.getString("nomeConto"), rs.getDouble("monthlyIncome"), rs.getDouble("bilancio"), rs.getDate("dataCreazione")));
             }
             return accountList;
         } catch (SQLException e) {

@@ -1,5 +1,8 @@
 package com.manno.easyfinance.persistence.model;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Account {
@@ -8,10 +11,28 @@ public class Account {
     private double monthltyIncome;
     private double bilancio;
 
+    private Date dataCreazione;
+
     public Account(String nomeConto, double monthltyIncome, double bilancio) {
         this.nomeConto = nomeConto;
         this.monthltyIncome = monthltyIncome;
         this.bilancio = bilancio;
+        setDataCreazione(new Date(LocalDate.now().getYear(), LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth()));
+    }
+
+    public Account(String nomeConto, double monthltyIncome, double bilancio, Date dataCreazione) {
+        this.nomeConto = nomeConto;
+        this.monthltyIncome = monthltyIncome;
+        this.bilancio = bilancio;
+        this.dataCreazione=dataCreazione;
+    }
+
+    public Date getDataCreazione() {
+        return dataCreazione;
+    }
+
+    public void setDataCreazione(Date dataCreazione) {
+        this.dataCreazione = dataCreazione;
     }
 
     public String getNomeConto() {

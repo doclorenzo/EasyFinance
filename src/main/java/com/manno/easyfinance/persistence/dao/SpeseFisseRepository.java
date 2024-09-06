@@ -29,7 +29,7 @@ public class SpeseFisseRepository implements Repository<SpeseFisse,String[]>{
              PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
         } catch (SQLException e) {
-            throw new SQLException("table Account doesn't exists or not populated");
+            throw new SQLException("table SpeseFisse doesn't exists or not populated");
         }
     }
 
