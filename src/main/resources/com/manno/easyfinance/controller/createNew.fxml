@@ -6,31 +6,26 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="669.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manno.easyfinance.controller.CreateNewCOntrollerDemo">
+<AnchorPane prefHeight="669.0" prefWidth="818.0" stylesheets="@styles/initialPageStyle.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manno.easyfinance.controller.CreateNewCOntrollerDemo">
    <children>
-      <Label layoutX="103.0" layoutY="124.0" text="Nome Conto" />
-      <Label layoutX="96.0" layoutY="230.0" text="Incasso mensile" />
-      <Label layoutX="103.0" layoutY="318.0" text="Spese fisse mensili" />
-      <Label layoutX="265.0" layoutY="40.0" text="Creazione nuovo conto">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Label>
-      <TextField fx:id="nomeContoField" layoutX="260.0" layoutY="120.0" />
-      <TextField fx:id="monthlyIncomeFiled" layoutX="260.0" layoutY="226.0" />
-      <TextField fx:id="spesaDescField" layoutX="260.0" layoutY="314.0" />
-      <Button fx:id="aggiungispesa" layoutX="344.0" layoutY="432.0" mnemonicParsing="false" onAction="#handleAggiungiSpesa" text="Aggiungi" />
-      <TableView fx:id="spesaTable" layoutX="481.0" layoutY="314.0" prefHeight="200.0" prefWidth="200.0">
+      <Label layoutX="37.0" layoutY="109.0" styleClass="label-create" text="Nome conto" />
+      <Label layoutX="37.0" layoutY="205.0" styleClass="label-create" text="Incasso mensile" />
+      <Label layoutX="26.0" layoutY="295.0" styleClass="label-create" text="Spese fisse mensili" />
+      <Label layoutX="276.0" layoutY="30.0" styleClass="label-title-create" text="Creazione nuovo conto" />
+      <TextField fx:id="nomeContoField" layoutX="213.0" layoutY="104.0" styleClass="text-field-create" />
+      <TextField fx:id="monthlyIncomeFiled" layoutX="213.0" layoutY="200.0" styleClass="text-field-create" />
+      <TextField fx:id="spesaDescField" layoutX="213.0" layoutY="290.0" styleClass="text-field-create" />
+      <Button fx:id="aggiungispesa" layoutX="341.0" layoutY="423.0" mnemonicParsing="false" onAction="#handleAggiungiSpesa" prefHeight="42.0" prefWidth="109.0" styleClass="action-button-create" text="Aggiungi" />
+      <TableView fx:id="spesaTable" layoutX="497.0" layoutY="290.0" prefHeight="285.0" prefWidth="267.0">
         <columns>
-          <TableColumn fx:id="spesaColDesc" prefWidth="100.0" text="Descrizione" />
-          <TableColumn fx:id="spesaColAmount" prefWidth="99.0" text="Totale" />
+          <TableColumn fx:id="spesaColDesc" prefWidth="135.0"  text="Descrizione" />
+          <TableColumn fx:id="spesaColAmount" prefWidth="131.0" text="Totale" />
         </columns>
       </TableView>
-      <TextField fx:id="spesaAmountField" layoutX="260.0" layoutY="373.0" />
-      <Label layoutX="260.0" layoutY="297.0" text="Descrizione" />
-      <Label layoutX="260.0" layoutY="356.0" text="Totale" />
-      <Button fx:id="invia" layoutX="695.0" layoutY="604.0" mnemonicParsing="false" onAction="#handleSubmit" prefHeight="25.0" prefWidth="69.0" text="Salva" />
+      <TextField fx:id="spesaAmountField" layoutX="213.0" layoutY="372.0" styleClass="text-field-create" />
+      <Label layoutX="217.0" layoutY="268.0" styleClass="label-little" text="Descrizione" />
+      <Label layoutX="213.0" layoutY="350.0" styleClass="label-little" text="Totale" />
+      <Button fx:id="invia" layoutX="682.0" layoutY="587.0" mnemonicParsing="false" onAction="#handleSubmit" prefHeight="47.0" prefWidth="82.0" styleClass="action-button-create" text="Crea" />
    </children>
 </AnchorPane>

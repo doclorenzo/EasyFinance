@@ -13,6 +13,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import org.postgresql.ds.PGSimpleDataSource;
 
@@ -33,7 +35,7 @@ public class InitialPageController {
     @FXML private ListView<String> accountListView;
     @FXML private Label account;
     @FXML private VBox wrapper;
-    @FXML private TextArea welcome;
+    @FXML private AnchorPane welcome;
     private ObservableList<Account> accounts;
     private ObservableList<String> accountsName;
     PGSimpleDataSource dataSource;
@@ -97,12 +99,10 @@ public class InitialPageController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("detailedPage.fxml"));
         AnchorPane newPage =fxmlLoader.load();
-
         DetailedPageController controller=fxmlLoader.getController();
-
         wrapper.getChildren().clear();
         wrapper.getChildren().add(newPage);
-        controller.initDataSource(dataSource,selectedItem,accountRepository.findById(selectedItem).get(), accountRepository);
+        controller.initDataSource(this, dataSource,selectedItem,accountRepository.findById(selectedItem).get(), accountRepository);
 
     }
 
@@ -110,9 +110,7 @@ public class InitialPageController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("editAccount.fxml"));
         AnchorPane newPage =fxmlLoader.load();
-
         EditAccountController controller=fxmlLoader.getController();
-
         wrapper.getChildren().clear();
         wrapper.getChildren().add(newPage);
         controller.initDataSource(dataSource,selectedItem, this);
@@ -123,9 +121,6 @@ public class InitialPageController {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("createNew.fxml"));
         AnchorPane newPage =fxmlLoader.load();
-
-        //CreateNewController controller=fxmlLoader.getController();
-
         CreateNewCOntrollerDemo controller = fxmlLoader.getController();
         controller.initDataSource(dataSource, accountsName, this);
         wrapper.getChildren().clear();
@@ -155,9 +150,13 @@ public class InitialPageController {
             // Show the dialog and wait until the user closes it
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
-                accountsName.remove(controller.getNomeCDel());
-                accountRepository.deleteById(controller.getNomeCDel());
-                showAutoDismissAlert(getGiga(),"Account rimosso con successo", Color.DARKGREEN);
+
+                if(accountsName.stream().anyMatch(x-> x.equals(controller.getNomeCDel()))){
+                    accountsName.remove(controller.getNomeCDel());
+                    accountRepository.deleteById(controller.getNomeCDel());
+                    showAutoDismissAlert(getGiga(),"Account rimosso con successo", Color.GREEN);
+                }
+                else showAutoDismissAlert(getGiga(), "L'account non esiste", Color.RED);
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -7,6 +7,7 @@ import com.manno.easyfinance.persistence.model.SpeseFisse;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -45,6 +46,7 @@ public abstract class AbstractNewEdit {
 
     @FXML
     public void initialize() {
+
         spesaColDesc.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
         spesaColAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         speseFisseObservableList = FXCollections.observableArrayList();
@@ -63,6 +65,14 @@ public abstract class AbstractNewEdit {
     @FXML
     public void handleAggiungiSpesa(){
         if(!spesaDescField.getText().isEmpty() && !spesaAmountField.getText().isEmpty()) {
+            try{
+                double val=Double.parseDouble(spesaAmountField.getText());
+                if(val<=0) throw new NumberFormatException("negativo");
+            }
+            catch (NumberFormatException e){
+                showAutoDismissAlert(parentController.getGiga(),"Importo non valido", Color.RED);
+                throw new RuntimeException(e);
+            }
             speseFisseObservableList.add(new SpeseFisse(nameConto, spesaDescField.getText(), Double.parseDouble(spesaAmountField.getText())));
             spesaDescField.setText("");
             spesaAmountField.setText("");
@@ -109,6 +119,14 @@ public abstract class AbstractNewEdit {
     public Account handleSubmitAbstract(double bil) throws SQLException, IOException{
         Account newAccount;
         if(!monthlyIncomeFiled.getText().isEmpty()){
+            double val;
+            try{
+                val=Double.parseDouble(monthlyIncomeFiled.getText());
+                if(val<0) throw new NumberFormatException("negativo");
+            } catch (NumberFormatException e) {
+                showAutoDismissAlert(parentController.getGiga(),"Incasso mensile non valido", Color.RED);
+                throw new RuntimeException(e);
+            }
             newAccount = new Account(nameConto, Double.parseDouble(monthlyIncomeFiled.getText()), bil);
             saveNewAccount=new AccountRepository(dataSource);
             saveNewAccount.save(newAccount);
@@ -118,6 +136,7 @@ public abstract class AbstractNewEdit {
             }
             return newAccount;
         }
-        return newAccount=new Account("b",0,0);
+        showAutoDismissAlert(parentController.getGiga(),"Inserisci incasso mensile", Color.ORANGE);
+        return null;
     }
 }

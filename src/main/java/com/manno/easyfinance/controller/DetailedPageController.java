@@ -15,11 +15,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import java.io.IOException;
+import java.net.HttpRetryException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -54,12 +56,14 @@ public class DetailedPageController {
     int curMonth;
     String nomeConto;
     Account curAccount;
+    InitialPageController parentcontroller;
 
     SpeseVariabiliRepository dbmanagerSV;
     SpeseFisseRepository dbmanagerSF;
     AccountRepository dbmanagerA;
 
-    public void initDataSource(PGSimpleDataSource datasource, String nomeConto, Account curAccount, AccountRepository accountRepository) throws SQLException {
+    public void initDataSource(InitialPageController giga, PGSimpleDataSource datasource, String nomeConto, Account curAccount, AccountRepository accountRepository) throws SQLException {
+        this.parentcontroller=giga;
         this.datasource=datasource;
         this.nomeConto=nomeConto;
         this.curAccount=curAccount;
@@ -185,7 +189,19 @@ public class DetailedPageController {
 
         Optional<ButtonType> clickedButton = dialog.showAndWait();
         if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
-            selectedSpesa.setAmount(controller.getAmount());
+
+            double val;
+            try{
+                if (controller.getDesc().isEmpty()) throw new IllegalArgumentException("Desc Not Valid");
+                val=controller.getAmount();
+                if(val<=0) throw new IllegalArgumentException("Amount must be positive");
+            }
+            catch (Exception e){
+                showAutoDismissAlert(parentcontroller.getGiga(), "Argomenti non Validi", Color.RED);
+                throw new RuntimeException(e);
+            }
+
+            selectedSpesa.setAmount(val);
             selectedSpesa.setDescrizione(controller.getDesc());
             tableLittle.refresh();
             dbmanagerSV.save(selectedSpesa);
@@ -214,11 +230,21 @@ public class DetailedPageController {
         dialog.setDialogPane(view);
 
         controller.setDesc("Default");
-        // Show the dialog and wait until the user closes it
         Optional<ButtonType> clickedButton = dialog.showAndWait();
         if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
+            double val;
+            try{
+                if (controller.getDesc().isEmpty()) throw new IllegalArgumentException("Desc Not Valid");
+                val=controller.getAmount();
+                if(val<=0) throw new IllegalArgumentException("Amount must be positive");
+            }
+            catch (Exception e){
+                showAutoDismissAlert(parentcontroller.getGiga(), "Argomenti non Validi", Color.RED);
+                throw new RuntimeException(e);
+            }
+
             LocalDate tmp=LocalDate.parse(giornoLabel.getText());
-            SpeseVariabili nuovaSpesa= new SpeseVariabili(nomeConto, controller.getAmount(), Date.valueOf(tmp), controller.getDesc());
+            SpeseVariabili nuovaSpesa= new SpeseVariabili(nomeConto, val, Date.valueOf(tmp), controller.getDesc());
             speseVarialibliGGList.add(nuovaSpesa);
             dbmanagerSV.save(nuovaSpesa);
             TableSpeseVariabiliHandler t = tableSpeseVariabiliHandlers.stream().filter(x-> x.getGiorno()==tmp.getDayOfMonth()).findFirst().get();
@@ -257,7 +283,16 @@ public class DetailedPageController {
         DeleteAccountController controller=retstat.getValue();
 
         if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
-            curAccount.setBilancio(curAccount.getBilancio()+Double.parseDouble(controller.getNomeCDel()));
+            double val;
+            try{
+                val=Double.parseDouble(controller.getNomeCDel());
+                if(val<=0) throw new NumberFormatException("Negativo");
+            }
+            catch(NumberFormatException e){
+                showAutoDismissAlert(this.parentcontroller.getGiga(), "Importo invalido", Color.RED);
+                throw new RuntimeException(e);
+            }
+            curAccount.setBilancio(curAccount.getBilancio()+val);
             bilancioLabel.setText(String.valueOf(curAccount.getBilancio()));
             dbmanagerA.save(curAccount);
         }
@@ -270,14 +305,23 @@ public class DetailedPageController {
         DeleteAccountController controller=retstat.getValue();
 
         if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
-            curAccount.setBilancio(curAccount.getBilancio()-Double.parseDouble(controller.getNomeCDel()));
+            double val;
+            try{
+                val=Double.parseDouble(controller.getNomeCDel());
+                if(val<=0) throw new NumberFormatException("Negativo");
+            }
+            catch(NumberFormatException e){
+                showAutoDismissAlert(this.parentcontroller.getGiga(), "Importo invalido", Color.RED);
+                throw new RuntimeException(e);
+            }
+            curAccount.setBilancio(curAccount.getBilancio()-val);
             bilancioLabel.setText(String.valueOf(curAccount.getBilancio()));
             dbmanagerA.save(curAccount);
         }
 
     }
 
-    private AbstractMap.SimpleEntry<Optional<ButtonType> ,DeleteAccountController>initDialog(String title, String filename) throws IOException {
+    private AbstractMap.SimpleEntry<Optional<ButtonType> ,DeleteAccountController> initDialog(String title, String filename) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(filename));
         DialogPane view = loader.load();

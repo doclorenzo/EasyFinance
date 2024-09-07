@@ -38,20 +38,30 @@ public class CreateNewCOntrollerDemo extends AbstractNewEdit{
             if(flag) {
                 nameConto=nomeContoField.getText();
                 flag=false;
+                nomeContoField.setEditable(false);
             }
             if(nomeContoField.getText().equals(nameConto)) {
                 super.handleAggiungiSpesa();
             }
         }
+        else{
+            showAutoDismissAlert(parentController.getGiga(),"Inserisci nome conto", Color.ORANGE);
+        }
     }
 
     @FXML
     public Account handleSubmit() throws SQLException, IOException {
-        Account newAccount=super.handleSubmitAbstract(0);
-        accounts.add(newAccount.getNomeConto());
-        showAutoDismissAlert(parentController.getGiga(),"Account creato con successo", Color.DARKGREEN);
-        parentController.handleAccount();
-        return newAccount;
+        if (!nomeContoField.getText().isEmpty()) {
+            Account newAccount = super.handleSubmitAbstract(0);
+            if (newAccount != null) {
+                accounts.add(newAccount.getNomeConto());
+                showAutoDismissAlert(parentController.getGiga(), "Account creato con successo", Color.GREEN);
+                parentController.handleAccount();
+            }
+            return newAccount;
+        }
+        else showAutoDismissAlert(parentController.getGiga(),"Inserisci nome conto", Color.ORANGE);
+        return null;
     }
 }
 

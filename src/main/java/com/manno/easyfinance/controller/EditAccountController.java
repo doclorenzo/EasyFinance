@@ -46,8 +46,10 @@ public class EditAccountController extends AbstractNewEdit{
             }
         }
         Account n=super.handleSubmitAbstract(saveNewAccount.findById(nameConto).get().getBilancio());
-        showAutoDismissAlert(parentController.getGiga(),"Account modificato con successo", Color.DARKGREEN);
-        parentController.handleAccount();
+        if(n!=null){
+            showAutoDismissAlert(parentController.getGiga(),"Account modificato con successo", Color.GREEN);
+            parentController.handleAccount();
+        }
         return n;
     }
 }

@@ -10,20 +10,7 @@
     -fx-background-color: #3c3c3c;
     -fx-padding: 10px;
     -fx-spacing: 10px;
-}
 
-/* Stile per i pulsanti */
-.button {
-    -fx-background-color: #4c4c4c;
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-background-radius: 8px;
-    -fx-border-radius: 8px;
-    -fx-border-color: #5a5a5a;
-    -fx-border-width: 1px;
-    -fx-padding: 10px 20px;
-    -fx-cursor: hand;
 }
 
 .button:hover {
@@ -34,55 +21,253 @@
     -fx-background-color: #5c5c5c;
 }
 
-/* Stile per la Label cliccabile */
-.label {
 
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-cursor: hand;
-    -fx-color: black;
+.split-pane {
+    -fx-background-color: #3c3c3c; /* Sfondo trasparente */
 }
 
-/* Stile della ListView */
+.split-pane .split-pane-divider {
+    -fx-padding: 1;
+    -fx-background-color: white; /* Rende la barra trasparente */
+
+}
+
+/* Stile per la ListView */
 .list-view {
-    -fx-background-color: #3c3c3c;
-    -fx-border-color: #4a4a4a;
-    -fx-control-inner-background: #3c3c3c;
-    -fx-control-inner-background-alt: #333333;
+    -fx-background-color: #3c3c3c;  /* Sfondo scuro */
+    -fx-border-color: transparent;
+    -fx-control-inner-background: #3c3c3c; /* Colore di sfondo degli elementi */
+    -fx-control-inner-background-alt: #333333; /* Colore alternativo */
     -fx-cell-hover-color: #4a4a4a;
-    -fx-cell-focus-inner-border: transparent;
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 14px;
+    -fx-focus-color: transparent; /* Rimuove il bordo blu del focus */
 }
 
-/* Stile degli elementi della ListView */
+/* Stile per le celle della ListView */
 .list-cell {
-    -fx-background-color: #3c3c3c;
-    -fx-text-fill: #ffffff;
+    -fx-background-color: #3c3c3c; /* Sfondo scuro degli elementi */
+    -fx-text-fill: #ffffff;         /* Testo bianco */
+    -fx-font-size: 14px;            /* Dimensione del testo */
+    -fx-padding: 10px;              /* Spaziatura interna */
+    -fx-border-color: transparent;  /* Rimuove il bordo */
+    -fx-background-radius: 8px;     /* Arrotonda i bordi delle celle */
+    -fx-border-radius: 8px;
+    -fx-effect: dropshadow( gaussian , rgba(0, 0, 0, 0.25) , 5, 0, 0 , 1 ); /* Aggiunge un'ombra leggera */
 }
 
+/* Stile per le celle quando si passa sopra col mouse */
 .list-cell:hover {
-    -fx-background-color: #5c5c5c;
+    -fx-background-color: #5c5c5c; /* Sfondo più chiaro al passaggio del mouse */
+    -fx-cursor: hand;              /* Cambia il cursore al passaggio del mouse */
+    -fx-border-color: transparent;
 }
 
+/* Stile per le celle selezionate */
 .list-cell:selected {
-    -fx-background-color: #007acc;
-    -fx-text-fill: #ffffff;
+    -fx-background-color: #007acc; /* Sfondo blu per la selezione */
+    -fx-text-fill: #ffffff;        /* Testo bianco per celle selezionate */
+    -fx-border-color: transparent;
 }
 
-/* Stile della TextArea */
-.text-area {
-    -fx-background-color: #3c3c3c;
-    -fx-font-size: 55px;
-    -fx-font-weight: bold;
-    -fx-padding: 20px;
-    -fx-color: black;
+/* Stile per le celle selezionate al passaggio del mouse */
+.list-cell:selected:hover {
+    -fx-background-color: #005fa3; /* Cambia leggermente il blu al passaggio del mouse */
 }
 
-.text-area:focused {
-    -fx-border-color: #007acc;
+/* Stile di base per il testo */
+.stylized-text {
+    -fx-font-family: "Arial", sans-serif;  /* Font sans-serif, più moderno */
+    -fx-font-size: 16px;                   /* Dimensione del testo moderata */
+    -fx-font-weight: normal;               /* Peso normale */
+    -fx-text-fill: #e0e0e0;                /* Colore del testo grigio chiaro */
 }
 
-.text-area .content {
-    -fx-text-fill: #ffffff;
+/* Stile per i titoli */
+.stylized-title {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 20px;                   /* Testo leggermente più grande per i titoli */
+    -fx-font-weight: bold;                 /* Grassetto per enfatizzare */
+    -fx-text-fill: #ffffff;                /* Colore del testo bianco */
+}
+
+/* Stile per i pulsanti */
+.stylized-button {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 15px;                   /* Testo leggermente più piccolo per i pulsanti */
+    -fx-text-fill: #ffffff;                /* Testo bianco */
+    -fx-background-color: #5a5a5a;         /* Sfondo grigio scuro */
+    -fx-border-color: #7a7a7a;             /* Bordo leggermente più chiaro */
+    -fx-border-radius: 4px;                /* Arrotondamento leggero del bordo */
+    -fx-background-radius: 4px;            /* Arrotondamento dello sfondo */
+    -fx-padding: 8px 16px;                 /* Spaziatura interna moderata */
+    -fx-cursor: hand;                      /* Cambia il cursore al passaggio del mouse */
+}
+
+.stylized-button:hover {
+    -fx-background-color: #3c3c3c;         /* Colore leggermente più scuro al passaggio del mouse */
+}
+
+/* Stile per le Label */
+.stylized-label {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #e0e0e0;
+    -fx-padding: 5px 10px;
+    -fx-border-color:  transparent transparent white transparent;
+    -fx-border-width: 2px;
+
+}
+
+.welcome-label {
+    -fx-font-family: "Roboto", sans-serif;  /* Font Roboto */
+    -fx-font-size: 30px;                   /* Dimensione del font per "Welcome to" */
+    -fx-font-weight: 100;                  /* Spessore molto basso */
+    -fx-text-fill: #ffffff;                /* Colore del testo bianco */
+}
+
+.title-label {
+    -fx-font-family: "Roboto", sans-serif;  /* Font Roboto */
+    -fx-font-size: 60px;                   /* Dimensione del font per "EasyFinance!" */
+    -fx-font-weight: 100;                  /* Spessore molto basso */
+    -fx-text-fill: #ffffff;                /* Colore del testo bianco */
+}
+
+/* Stile per la Label */
+.label-create {
+    -fx-font-family: "Roboto", sans-serif;  /* Font Roboto */
+    -fx-font-size: 18px;                    /* Dimensione del font */
+    -fx-font-weight: 100;                   /* Spessore molto basso */
+    -fx-text-fill: #ffffff;                 /* Colore del testo bianco */
+    -fx-padding: 0 0 5px 0;                 /* Padding inferiore per distanziare dai TextField */
+}
+
+/* Stile per il TextField */
+.text-field-create {
+    -fx-font-family: "Roboto", sans-serif;  /* Font Roboto */
+    -fx-font-size: 20px;                    /* Dimensione del font */
+    -fx-font-weight: 100;                   /* Spessore molto basso */
+    -fx-text-fill: #ffffff;                 /* Colore del testo bianco */
+    -fx-background-color: #2c2c2c;          /* Sfondo grigio scuro */
+    -fx-border-color: #7a7a7a;              /* Bordo grigio chiaro */
+    -fx-border-radius: 5px;                /* Arrotondamento dei bordi */
+    -fx-background-radius: 5px;            /* Arrotondamento dello sfondo */
+    -fx-padding: 5px;                       /* Padding interno */
+    -fx-prompt-text-fill: #a0a0a0;         /* Colore del testo del prompt */
+}
+
+/* Stile per TableView */
+.table-view {
+    -fx-background-color: #2c2c2c;  /* Sfondo grigio scuro per la tabella */
+    -fx-border-color: #7a7a7a;      /* Bordo grigio chiaro */
+    -fx-border-width: 0px;          /* Larghezza del bordo */
+    -fx-border-radius: 0px;         /* Arrotondamento dei bordi */
+    -fx-font-family: "Roboto", sans-serif; /* Font Roboto */
+    -fx-font-size: 15px;            /* Dimensione del font */
+    -fx-text-fill: white;         /* Colore del testo bianco */
+}
+
+/* Stile per le colonne della TableView */
+.table-column {
+
+    -fx-background-color: white;  /* Sfondo grigio scuro per intestazioni colonne */
+    -fx-font-family: "Roboto", sans-serif; /* Font Roboto */
+    -fx-font-size: 16px;            /* Dimensione del font */
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: green;  /* Sfondo grigio chiaro per la riga selezionata */
+    -fx-text-fill: #ffffff;         /* Colore del testo bianco */
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #4a4a4a;  /* Sfondo grigio scuro al passaggio del mouse */
+    -fx-text-fill: #ffffff;         /* Colore del testo bianco */
+}
+
+/* Stile per i pulsanti */
+.action-button-create {
+    -fx-font-family: "Roboto", sans-serif; /* Font Roboto */
+    -fx-font-size: 14px;                  /* Dimensione del font */
+    -fx-font-weight: 100;                 /* Spessore molto basso */
+    -fx-background-color: #4a4a4a;        /* Sfondo grigio scuro */
+    -fx-text-fill: #ffffff;               /* Colore del testo bianco */
+    -fx-border-color: #7a7a7a;            /* Bordo grigio chiaro */
+    -fx-border-radius: 5px;              /* Arrotondamento dei bordi */
+    -fx-padding: 9px 20px;              /* Padding interno del pulsante */
+    -fx-background-radius: 5px;          /* Arrotondamento dello sfondo */
+}
+
+.action-button-create:hover {
+    -fx-background-color: #5a5a5a;       /* Sfondo più chiaro al passaggio del mouse */
+}
+
+.label-title-create {
+    -fx-font-family: "Roboto", sans-serif;  /* Font Roboto */
+    -fx-font-size: 30px;                    /* Dimensione del font */
+    -fx-font-weight: 100;                   /* Spessore molto basso */
+    -fx-text-fill: #ffffff;                 /* Colore del testo bianco */
+    -fx-padding: 0 0 5px 0;                 /* Padding inferiore per distanziare dai TextField */
+}
+
+.label-little {
+    -fx-font-family: "Roboto", sans-serif;  /* Font Roboto */
+    -fx-font-size: 12px;                    /* Dimensione del font */
+    -fx-font-weight: 100;                   /* Spessore molto basso */
+    -fx-text-fill: #ffffff;                 /* Colore del testo bianco */
+    -fx-padding: 0 0 5px 0;                 /* Padding inferiore per distanziare dai TextField */
+}
+
+.table-cell {
+    -fx-background-color: #2c2c2c;  /* Sfondo grigio scuro per la tabella */
+    -fx-border-color:#7a7a7a #7a7a7a #7a7a7a #7a7a7a;      /* Bordo grigio chiaro */
+    -fx-border-width: 1px;          /* Larghezza del bordo */        /* Arrotondamento dei bordi */
+    -fx-font-family: "Roboto", sans-serif; /* Font Roboto */
+    -fx-font-size: 18px;            /* Dimensione del font */
+    -fx-text-fill: white;         /* Colore del testo bianco */
+
+}
+
+.table-view .scroll-pane {
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: as-needed;
+}
+
+/* Stile per ComboBox */
+.combo-box {
+    -fx-background-color: #4a4a4a;  /* Sfondo grigio scuro per la ComboBox */
+    -fx-border-color: #7a7a7a;      /* Bordo grigio chiaro */
+    -fx-border-width: 1px;          /* Larghezza del bordo */
+    -fx-border-radius: 5px;         /* Arrotondamento dei bordi */
+    -fx-padding: 5px;               /* Padding interno */
+    -fx-font-family: "Roboto", sans-serif; /* Font Roboto */
+    -fx-font-size: 16px;            /* Dimensione del font */
+    -fx-text-fill: #ffffff;         /* Colore del testo bianco */
+    -fx-pref-height: 15px;          /* Altezza preferita della ComboBox */
+}
+
+/* Stile per il pulsante di discesa (freccia) */
+.combo-box .arrow {
+    -fx-background-color: #3c3c3c;  /* Sfondo grigio scuro per la freccia */
+    -fx-border-color: #7a7a7a;      /* Bordo grigio chiaro */
+    -fx-border-width: 1px;          /* Larghezza del bordo */
+    -fx-border-radius: 5px;         /* Arrotondamento dei bordi */
+}
+
+/* Stile per il menu a discesa della ComboBox */
+.combo-box-popup {
+    -fx-background-color: #2c2c2c;  /* Sfondo grigio scuro per il menu a discesa */
+    -fx-border-color: #7a7a7a;      /* Bordo grigio chiaro */
+    -fx-border-width: 1px;          /* Larghezza del bordo */
+    -fx-border-radius: 5px;         /* Arrotondamento dei bordi */
+}
+
+/* Stile per gli elementi del menu a discesa */
+.combo-box-popup .list-cell {
+    -fx-background-color: #4a4a4a;  /* Sfondo grigio scuro per gli elementi */
+    -fx-text-fill: #ffffff;         /* Colore del testo bianco */
+    -fx-padding: 5px;              /* Padding interno degli elementi */
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #5a5a5a;  /* Sfondo più chiaro al passaggio del mouse */
 }
