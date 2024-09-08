@@ -19,7 +19,7 @@
             <TableColumn minWidth="0.0" prefWidth="0.0" />
         </columns>
       </TableView>
-      <TableView fx:id="tableLittle" layoutX="346.0" layoutY="133.0" prefHeight="269.0" prefWidth="204.0" >
+      <TableView fx:id="tableLittle" layoutX="346.0" layoutY="133.0" prefHeight="269.0" prefWidth="204.0">
         <columns>
           <TableColumn fx:id="descCol" prefWidth="100.0" text="Descrizione" />
           <TableColumn fx:id="speseCol" prefWidth="103.0" text="Spese" />
@@ -27,7 +27,7 @@
       </TableView>
       <Button layoutX="346.0" layoutY="402.0" mnemonicParsing="false" onAction="#handleAggiungi" prefHeight="25.0" prefWidth="204.0" styleClass="action-button-create" text="Aggiungi" />
       <Label fx:id="giornoLabel" layoutX="402.0" layoutY="100.0" styleClass="label-create" text="2024-01-01" />
-      <Label fx:id="bilancioLabel" layoutX="416.0" layoutY="470.0" text="x" textFill="#3dbf2b">
+      <Label fx:id="bilancioLabel" layoutX="477.0" layoutY="463.0" prefHeight="17.0" prefWidth="63.0" text="x" textFill="#3dbf2b">
          <font>
             <Font size="20.0" />
          </font></Label>
@@ -39,10 +39,13 @@
       <Label layoutX="742.0" layoutY="216.0" styleClass="label-create" text="+" />
       <Label layoutX="744.0" layoutY="299.0" styleClass="label-create" text="-" />
       <Accordion layoutX="433.0" layoutY="534.0" />
-      <Label layoutX="343.0" layoutY="469.0" styleClass="label-create" text="Bilancio:">
+      <Label layoutX="342.0" layoutY="469.0" styleClass="label-create" text="Bilancio Totale:">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
+      <Label layoutX="342.0" layoutY="518.0" prefHeight="32.0" prefWidth="225.0" styleClass="label-create" text="Spesa massima Giornaliera" />
+      <Label fx:id="SMG" layoutX="577.0" layoutY="534.0" styleClass="label-create" text="Label" textFill="#eeff00" />
+      <Label layoutX="373.0" layoutY="542.0" styleClass="label-create" text="su Incasso Mensile" />
    </children>
 </AnchorPane>

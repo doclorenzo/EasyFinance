@@ -1,56 +1,47 @@
 package com.manno.easyfinance.Animations;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
-import javafx.application.Platform;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 public class AutoDismissAlert {
 
-    public static void showAutoDismissAlert(AnchorPane rootPane, String message, Color backgroundColor) {
-        // Crea un layout per il messaggio con uno stile CSS
-        StackPane alertPane = new StackPane();
-        alertPane.setStyle("-fx-background-color: " + toRgbString(backgroundColor) + ";"
-                + "-fx-background-radius: 20px;" // Bordi arrotondati
-                + "-fx-padding: 20px;" // Padding per ingrandire l'alert
-                + "-fx-border-radius: 20px;" // Bordi arrotondati anche per il bordo
-                + "-fx-border-color: black;" // Colore del bordo
-                + "-fx-border-width: 2px;"); // Spessore del bordo
+    public static void showAutoDismissAlert(AnchorPane rootPane, String message, Color textColor) {
 
-        Label messageLabel = new Label(message);
-        messageLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: white;"); // Font più grande e testo bianco
-        alertPane.getChildren().add(messageLabel);
+        HBox alertBox = new HBox();
+        alertBox.setStyle("-fx-background-color: #333; -fx-padding: 15px; -fx-background-radius: 10; -fx-border-radius: 10; ");
+        alertBox.setAlignment(Pos.CENTER_LEFT);
+        alertBox.setSpacing(10);
 
-        // Posiziona l'alertPane in basso a destra all'interno del rootPane
-        rootPane.getChildren().add(alertPane);
-        AnchorPane.setBottomAnchor(alertPane, 20.0);
-        AnchorPane.setRightAnchor(alertPane, 20.0);
+        // Label con il messaggio
+        Label alertLabel = new Label(message);
+        alertLabel.setTextFill(textColor);  // Colore del testo personalizzabile
+        alertLabel.setFont(new Font("Roboto", 16));
+        alertLabel.setStyle("-fx-font-weight: bold;");  // Testo in grassetto
 
-        // Timeline per la dissolvenza e la chiusura automatica
-        PauseTransition delay = new PauseTransition(Duration.seconds(2)); // Attendi 2 secondi
-        delay.setOnFinished(event -> {
-            FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), alertPane);
-            fadeOut.setFromValue(1.0);
-            fadeOut.setToValue(0.0);
-            fadeOut.setOnFinished(e -> rootPane.getChildren().remove(alertPane));
-            fadeOut.play();
-        });
+        // Pulsante "X" per la chiusura manuale
+        Button closeButton = new Button("X");
+        closeButton.setStyle("-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: bold;");
+        closeButton.setOnAction(e -> rootPane.getChildren().remove(alertBox));
 
-        delay.play();
-    }
+        alertBox.getChildren().addAll(alertLabel, closeButton);
 
-    // Metodo per convertire il colore in una stringa CSS
-    private static String toRgbString(Color color) {
-        int red = (int) (color.getRed() * 255);
-        int green = (int) (color.getGreen() * 255);
-        int blue = (int) (color.getBlue() * 255);
-        return String.format("rgb(%d, %d, %d)", red, green, blue);
+        rootPane.getChildren().add(alertBox);
+        AnchorPane.setBottomAnchor(alertBox, 20.0);
+        AnchorPane.setRightAnchor(alertBox, 20.0);
+
+        // Animazione di dissolvenza che inizia dopo 2 secondi
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(2), alertBox);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.setDelay(Duration.seconds(2));  // Ritarda l'inizio della dissolvenza
+        fadeOut.setOnFinished(event -> rootPane.getChildren().remove(alertBox));  // Rimuove l'alert alla fine
+        fadeOut.play();
     }
 }

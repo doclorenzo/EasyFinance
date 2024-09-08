@@ -6,15 +6,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import org.postgresql.ds.PGSimpleDataSource;
 
@@ -33,7 +30,6 @@ public class InitialPageController {
 
     @FXML private AnchorPane giga;
     @FXML private ListView<String> accountListView;
-    @FXML private Label account;
     @FXML private VBox wrapper;
     @FXML private AnchorPane welcome;
     private ObservableList<Account> accounts;
@@ -50,7 +46,7 @@ public class InitialPageController {
     }
 
     @FXML
-    public void initialize() throws IOException{
+    public void initialize(){
 
         accounts=FXCollections.observableArrayList();
         accountsName=FXCollections.observableArrayList();
@@ -80,9 +76,7 @@ public class InitialPageController {
 
         contextMenu.getItems().add(editItem);
 
-        accountListView.setOnContextMenuRequested(event -> {
-            contextMenu.show(accountListView, event.getScreenX(), event.getScreenY());
-        });
+        accountListView.setOnContextMenuRequested(event -> contextMenu.show(accountListView, event.getScreenX(), event.getScreenY()));
 
     }
 
@@ -128,7 +122,7 @@ public class InitialPageController {
     }
 
     @FXML
-    public void handleAccount() throws IOException {
+    public void handleAccount() {
         wrapper.getChildren().clear();
         wrapper.getChildren().add(welcome);
     }
@@ -159,7 +153,7 @@ public class InitialPageController {
                 else showAutoDismissAlert(getGiga(), "L'account non esiste", Color.RED);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 

@@ -2,7 +2,6 @@ package com.manno.easyfinance.persistence.dao;
 import com.manno.easyfinance.persistence.model.Account;
 import org.postgresql.ds.PGSimpleDataSource;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

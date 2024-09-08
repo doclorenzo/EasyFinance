@@ -15,20 +15,18 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import java.io.IOException;
-import java.net.HttpRetryException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.AbstractMap;
+import java.util.Calendar;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static com.manno.easyfinance.Animations.AutoDismissAlert.showAutoDismissAlert;
 import static com.manno.easyfinance.controller.DeatiledTableManager.staticTableFiller.getDataForTable;
@@ -48,6 +46,7 @@ public class DetailedPageController {
     @FXML private Label nomeContoLabel;
     @FXML private Label giornoLabel;
     @FXML private Label bilancioLabel;
+    @FXML private Label SMG;
 
     ObservableList<String> mesi = FXCollections.observableArrayList("JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DICEMBER");
     PGSimpleDataSource datasource;
@@ -57,6 +56,8 @@ public class DetailedPageController {
     String nomeConto;
     Account curAccount;
     InitialPageController parentcontroller;
+    int maxDay;
+    Calendar c;
 
     SpeseVariabiliRepository dbmanagerSV;
     SpeseFisseRepository dbmanagerSF;
@@ -84,6 +85,13 @@ public class DetailedPageController {
         giornoLabel.setText(LocalDate.now().toString());
 
         bilancioLabel.setText(String.valueOf(curAccount.getBilancio()));
+
+        c = Calendar.getInstance();
+        c.set(Calendar.MONTH, curMonth);
+        maxDay = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        SMG.setText(String.valueOf(Math.round(curAccount.getMonthltyIncome()*12/365*100)/100.0));
+
     }
 
     @FXML
@@ -122,17 +130,15 @@ public class DetailedPageController {
 
         deleteItem.setOnAction(event -> {
             SpeseVariabili selectedSpesa = tableLittle.getSelectionModel().getSelectedItem();
-            if (selectedSpesa != null) {
-                speseVarialibliGGList.remove(selectedSpesa);
-                dbmanagerSV.deleteById(selectedSpesa.getChiave());
-                int tmp=LocalDate.parse(giornoLabel.getText()).getDayOfMonth();
-                TableSpeseVariabiliHandler t = tableSpeseVariabiliHandlers.stream().filter(x-> x.getGiorno()==tmp).findFirst().get();
-                t.subSpesa(selectedSpesa.getAmount());
-                tableBig.refresh();
-                curAccount.setBilancio(curAccount.getBilancio()+selectedSpesa.getAmount());
-                bilancioLabel.setText(String.valueOf(curAccount.getBilancio()));
-                dbmanagerA.save(curAccount);
-            }
+            dbmanagerSV.deleteById(selectedSpesa.getChiave());
+            speseVarialibliGGList.remove(selectedSpesa);
+            int tmp=LocalDate.parse(giornoLabel.getText()).getDayOfMonth();
+            TableSpeseVariabiliHandler t = tableSpeseVariabiliHandlers.stream().filter(x-> x.getGiorno()==tmp).findFirst().get();
+            t.subSpesa(selectedSpesa.getAmount());
+            tableBig.refresh();
+            curAccount.setBilancio(curAccount.getBilancio()+selectedSpesa.getAmount());
+            bilancioLabel.setText(String.valueOf(curAccount.getBilancio()));
+            dbmanagerA.save(curAccount);
         });
 
 
@@ -162,9 +168,11 @@ public class DetailedPageController {
     }
 
     @FXML
-    public void handleComboBox() throws SQLException {
+    public void handleComboBox() {
         String newMonthSelected = mesiCombo.getValue();
         int mesi= Month.valueOf(newMonthSelected).getValue();
+        c.set(Calendar.MONTH, curMonth);
+        maxDay = c.getActualMaximum(Calendar.DAY_OF_MONTH);
         tableSpeseVariabiliHandlers.clear();
         tableSpeseVariabiliHandlers.addAll(getDataForTable(datasource, nomeConto, mesi, curMonth, this.curAccount.getDataCreazione().toLocalDate()));
 
@@ -192,7 +200,7 @@ public class DetailedPageController {
 
             double val;
             try{
-                if (controller.getDesc().isEmpty()) throw new IllegalArgumentException("Desc Not Valid");
+                if (controller.getDesc().isEmpty() || controller.getDesc().isBlank()) throw new IllegalArgumentException("Desc Not Valid");
                 val=controller.getAmount();
                 if(val<=0) throw new IllegalArgumentException("Amount must be positive");
             }
@@ -229,12 +237,11 @@ public class DetailedPageController {
         dialog.initModality(Modality.WINDOW_MODAL);
         dialog.setDialogPane(view);
 
-        controller.setDesc("Default");
         Optional<ButtonType> clickedButton = dialog.showAndWait();
         if (clickedButton.orElse(ButtonType.CANCEL) == ButtonType.OK) {
             double val;
             try{
-                if (controller.getDesc().isEmpty()) throw new IllegalArgumentException("Desc Not Valid");
+                if (controller.getDesc().isEmpty() || controller.getDesc().isBlank()) throw new IllegalArgumentException("Desc Not Valid");
                 val=controller.getAmount();
                 if(val<=0) throw new IllegalArgumentException("Amount must be positive");
             }
@@ -250,7 +257,7 @@ public class DetailedPageController {
             TableSpeseVariabiliHandler t = tableSpeseVariabiliHandlers.stream().filter(x-> x.getGiorno()==tmp.getDayOfMonth()).findFirst().get();
             t.addSpesa(nuovaSpesa.getAmount());
             tableBig.refresh();
-            curAccount.setBilancio(curAccount.getBilancio()-nuovaSpesa.getAmount());
+            curAccount.setBilancio(curAccount.getBilancio()-val);
             bilancioLabel.setText(String.valueOf(curAccount.getBilancio()));
             dbmanagerA.save(curAccount);
         }
@@ -278,7 +285,7 @@ public class DetailedPageController {
 
     public void handleDeposita() throws IOException {
 
-        AbstractMap.SimpleEntry<Optional<ButtonType> ,DeleteAccountController> retstat=initDialog("Deposita", "deleteAccount.fxml");
+        AbstractMap.SimpleEntry<Optional<ButtonType> ,DeleteAccountController> retstat=initDialog("Deposita");
         Optional<ButtonType> clickedButton= retstat.getKey();
         DeleteAccountController controller=retstat.getValue();
 
@@ -300,7 +307,7 @@ public class DetailedPageController {
 
     public void handlePreleva() throws IOException {
 
-        AbstractMap.SimpleEntry<Optional<ButtonType> ,DeleteAccountController> retstat=initDialog("Preleva", "deleteAccount.fxml");
+        AbstractMap.SimpleEntry<Optional<ButtonType> ,DeleteAccountController> retstat=initDialog("Preleva");
         Optional<ButtonType> clickedButton= retstat.getKey();
         DeleteAccountController controller=retstat.getValue();
 
@@ -321,9 +328,9 @@ public class DetailedPageController {
 
     }
 
-    private AbstractMap.SimpleEntry<Optional<ButtonType> ,DeleteAccountController> initDialog(String title, String filename) throws IOException {
+    private AbstractMap.SimpleEntry<Optional<ButtonType> ,DeleteAccountController> initDialog(String title) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(filename));
+        loader.setLocation(getClass().getResource("deleteAccount.fxml"));
         DialogPane view = loader.load();
         DeleteAccountController controller = loader.getController();
         Dialog<ButtonType> dialog = new Dialog<>();

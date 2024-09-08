@@ -7,7 +7,6 @@ import com.manno.easyfinance.persistence.model.SpeseFisse;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -17,7 +16,7 @@ import org.postgresql.ds.PGSimpleDataSource;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
+
 
 import static com.manno.easyfinance.Animations.AutoDismissAlert.showAutoDismissAlert;
 
@@ -116,7 +115,7 @@ public abstract class AbstractNewEdit {
     }
 
 
-    public Account handleSubmitAbstract(double bil) throws SQLException, IOException{
+    public Account handleSubmitAbstract(double bil) throws SQLException{
         Account newAccount;
         if(!monthlyIncomeFiled.getText().isEmpty()){
             double val;

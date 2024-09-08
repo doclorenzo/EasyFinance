@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.postgresql.ds.PGSimpleDataSource;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 
 public class SpeseVariabiliRepository implements Repository<SpeseVariabili, AbstractMap.SimpleEntry<String,Integer>> {
@@ -82,21 +79,23 @@ public class SpeseVariabiliRepository implements Repository<SpeseVariabili, Abst
     private SpeseVariabili insert(SpeseVariabili entity) {
         String sql = "INSERT INTO SpeseVariabili (nomeConto, descrizione, amount, gg) VALUES (?, ?, ?, ?)";
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, entity.getNomeConto());
             statement.setString(2, entity.getDescrizione());
             statement.setDouble(3, entity.getAmount());
             statement.setDate(4, entity.getData());
-            statement.executeUpdate();
-            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    int idGenerato = generatedKeys.getInt(1); // Recuperiamo l'ID auto-incrementato
-                    entity.setId(idGenerato); // Impostiamo l'ID nel modello Utente
-                    System.out.println("Utente inserito con ID: " + idGenerato);
+            int affected=statement.executeUpdate();
+            if(affected>0){
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        int idGenerato = generatedKeys.getInt(1); // Recuperiamo l'ID auto-incrementato
+                        entity.setId(idGenerato); // Impostiamo l'ID nel modello Utente
+                        System.out.println("Utente inserito con ID: " + idGenerato);
+                    }
                 }
-            }
-            catch (Exception e) {
-                e.printStackTrace();
+                catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
             return entity;
         } catch (SQLException e) {

@@ -2,7 +2,6 @@ package com.manno.easyfinance.persistence.model;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Locale;
 import java.util.Objects;
 
 public class Account {

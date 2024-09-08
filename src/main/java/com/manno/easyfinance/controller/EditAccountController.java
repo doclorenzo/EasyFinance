@@ -4,7 +4,6 @@ import com.manno.easyfinance.persistence.dao.AccountRepository;
 import com.manno.easyfinance.persistence.dao.SpeseFisseRepository;
 import com.manno.easyfinance.persistence.model.Account;
 import com.manno.easyfinance.persistence.model.SpeseFisse;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

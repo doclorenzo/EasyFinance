@@ -12,7 +12,7 @@
          <children>
             <Label layoutX="52.0" layoutY="54.0" styleClass="label-create" text="Descrizione" />
             <Label layoutX="52.0" layoutY="137.0" styleClass="label-create" text="Importo" />
-            <TextField fx:id="descrizione" layoutX="205.0" layoutY="49.0" styleClass="text-field-create" text="Default" />
+            <TextField fx:id="descrizione" layoutX="205.0" layoutY="49.0" styleClass="text-field-create" />
             <TextField fx:id="importo" layoutX="205.0" layoutY="132.0" styleClass="text-field-create" />
          </children></AnchorPane>
     </header>

@@ -13,7 +13,7 @@ import java.util.Calendar;
 
 public class staticTableFiller {
 
-    static public ObservableList<TableSpeseVariabiliHandler> getDataForTable(PGSimpleDataSource dataSource, String nomeConto, int mese, int currentMonth, LocalDate dataCreazione) throws SQLException {
+    static public ObservableList<TableSpeseVariabiliHandler> getDataForTable(PGSimpleDataSource dataSource, String nomeConto, int mese, int currentMonth, LocalDate dataCreazione) {
         String sql = "select DATE_TRUNC('day', gg) as giorno , sum(amount) as spesatot from spesevariabili WHERE EXTRACT(MONTH FROM gg) = ? and nomeConto=? group by DATE_TRUNC('day', gg)";
         ObservableList<TableSpeseVariabiliHandler> ret= FXCollections.observableArrayList();
         try (Connection connection = dataSource.getConnection();
@@ -25,7 +25,7 @@ public class staticTableFiller {
                 ret.add(new TableSpeseVariabiliHandler(Integer.parseInt(rs.getDate("giorno").toString().substring(8,10)), rs.getDouble("spesatot")));
             }
 
-            int maxDay=0;
+            int maxDay;
             if(mese==currentMonth){
                 maxDay= LocalDate.now().getDayOfMonth();
             }

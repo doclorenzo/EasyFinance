@@ -1,15 +1,5 @@
 package com.manno.easyfinance.controller.DeatiledTableManager;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import org.postgresql.ds.PGSimpleDataSource;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Locale;
 import java.util.Objects;
 
 public class TableSpeseVariabiliHandler implements Comparable<TableSpeseVariabiliHandler> {

@@ -1,9 +1,7 @@
 package com.manno.easyfinance.persistence.model;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.AbstractMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class SpeseVariabili {
@@ -18,7 +16,7 @@ public class SpeseVariabili {
 
     public void setId(int id) {
         this.id = id;
-        this.chiave = new AbstractMap.SimpleEntry<String,Integer>(this.nomeConto, this.id);
+        this.chiave = new AbstractMap.SimpleEntry<>(this.nomeConto, this.id);
     }
 
     public SpeseVariabili(String nomeConto, double amount, Date gg, String descrizione) {
