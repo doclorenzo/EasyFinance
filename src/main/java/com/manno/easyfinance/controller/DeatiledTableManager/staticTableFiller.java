@@ -13,31 +13,31 @@ import java.util.Calendar;
 
 public class staticTableFiller {
 
-    static public ObservableList<TableSpeseVariabiliHandler> getDataForTable(PGSimpleDataSource dataSource, String nomeConto, int mese, int currentMonth, LocalDate dataCreazione) {
-        String sql = "select DATE_TRUNC('day', gg) as giorno , sum(amount) as spesatot from spesevariabili WHERE EXTRACT(MONTH FROM gg) = ? and nomeConto=? group by DATE_TRUNC('day', gg)";
+    static public ObservableList<TableSpeseVariabiliHandler> getDataForTable(PGSimpleDataSource dataSource, String nomeConto, int mese, int currentMonth, LocalDate dataCreazione, int year) {
+        String sql = "select DATE_TRUNC('day', gg) as giorno , sum(amount) as spesatot from spesevariabili WHERE EXTRACT(MONTH FROM gg) = ? and EXTRACT(YEAR FROM gg) = ? and nomeConto=? group by DATE_TRUNC('day', gg)";
         ObservableList<TableSpeseVariabiliHandler> ret= FXCollections.observableArrayList();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, mese);
-            statement.setString(2, nomeConto);
+            statement.setInt(2, year);
+            statement.setString(3, nomeConto);
             ResultSet rs = statement.executeQuery();
             while(rs.next()){
                 ret.add(new TableSpeseVariabiliHandler(Integer.parseInt(rs.getDate("giorno").toString().substring(8,10)), rs.getDouble("spesatot")));
             }
 
             int maxDay;
-            if(mese==currentMonth){
+            if(mese==currentMonth && year==LocalDate.now().getYear()){
                 maxDay= LocalDate.now().getDayOfMonth();
             }
-
             else{
                 Calendar c = Calendar.getInstance();
-                c.set(Calendar.MONTH, mese);
+                c.set(Calendar.MONTH, mese-1);
                 maxDay = c.getActualMaximum(Calendar.DAY_OF_MONTH);
             }
             int minDay=1;
 
-            if(mese==dataCreazione.getMonthValue()){
+            if(mese==dataCreazione.getMonthValue() && year==dataCreazione.getYear()){
                 minDay=dataCreazione.getDayOfMonth();
             }
 

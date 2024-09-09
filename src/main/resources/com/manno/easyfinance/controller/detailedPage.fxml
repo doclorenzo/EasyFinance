@@ -31,7 +31,7 @@
          <font>
             <Font size="20.0" />
          </font></Label>
-      <ComboBox fx:id="mesiCombo" layoutX="31.0" layoutY="50.0" maxHeight="30.0" onAction="#handleComboBox" prefHeight="30.0" prefWidth="294.0" promptText="Mese" styleClass="combo-box" />
+      <ComboBox fx:id="mesiCombo" layoutX="31.0" layoutY="50.0" maxHeight="54.0" onAction="#handleComboBox" prefHeight="54.0" prefWidth="134.0" promptText="Mese" styleClass="combo-box" />
       <Button layoutX="590.0" layoutY="132.0" mnemonicParsing="false" onAction="#handleStipendioSpeseFisse" prefHeight="25.0" prefWidth="149.0" styleClass="action-button-create" text="Stipendio e Spese Fisse" />
       <Label layoutX="742.0" layoutY="136.0" styleClass="label-create" text="+/-" />
       <Button layoutX="590.0" layoutY="212.0" mnemonicParsing="false" onAction="#handleDeposita" prefHeight="25.0" prefWidth="149.0" styleClass="action-button-create" text="Deposita" />
@@ -47,5 +47,8 @@
       <Label layoutX="342.0" layoutY="518.0" prefHeight="32.0" prefWidth="225.0" styleClass="label-create" text="Spesa massima Giornaliera" />
       <Label fx:id="SMG" layoutX="577.0" layoutY="534.0" styleClass="label-create" text="Label" textFill="#eeff00" />
       <Label layoutX="373.0" layoutY="542.0" styleClass="label-create" text="su Incasso Mensile" />
+      <Label layoutX="346.0" layoutY="598.0" styleClass="label-create" text="Risparmi/Debito:" />
+      <Label fx:id="risparmi" layoutX="577.0" layoutY="598.0" styleClass="label-create" text="Label" textFill="#eeff00" />
+      <ComboBox fx:id="mesiCombo1" layoutX="196.0" layoutY="50.0" maxHeight="54.0" onAction="#handleComboBox1" prefHeight="54.0" prefWidth="128.0" promptText="Anno" styleClass="combo-box" />
    </children>
 </AnchorPane>

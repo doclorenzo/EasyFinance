@@ -38,6 +38,7 @@ public class DetailedPageController {
     @FXML private TableColumn<TableSpeseVariabiliHandler, Integer> giorniCol;
     @FXML private TableColumn<TableSpeseVariabiliHandler, Double> speseTotCol;
     @FXML private ComboBox<String> mesiCombo;
+    @FXML private ComboBox<Integer> mesiCombo1;
 
     @FXML private TableView<SpeseVariabili> tableLittle;
     @FXML private TableColumn<SpeseVariabili, String> descCol;
@@ -47,8 +48,11 @@ public class DetailedPageController {
     @FXML private Label giornoLabel;
     @FXML private Label bilancioLabel;
     @FXML private Label SMG;
+    @FXML private Label risparmi;
 
-    ObservableList<String> mesi = FXCollections.observableArrayList("JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DICEMBER");
+    ObservableList<String> finalMesi = FXCollections.observableArrayList("JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER");
+    ObservableList<String> mesi= FXCollections.observableArrayList(finalMesi);
+    ObservableList<Integer> anni;
     PGSimpleDataSource datasource;
     ObservableList<TableSpeseVariabiliHandler> tableSpeseVariabiliHandlers;
     ObservableList<SpeseVariabili> speseVarialibliGGList;
@@ -58,6 +62,8 @@ public class DetailedPageController {
     InitialPageController parentcontroller;
     int maxDay;
     Calendar c;
+    double tot;
+    int newYearSelected;
 
     SpeseVariabiliRepository dbmanagerSV;
     SpeseFisseRepository dbmanagerSF;
@@ -73,13 +79,18 @@ public class DetailedPageController {
         this.dbmanagerA=accountRepository;
 
         mesiCombo.valueProperty().setValue(LocalDate.now().getMonth().toString());
+        mesiCombo1.valueProperty().setValue(LocalDate.now().getYear());
         curMonth=LocalDate.now().getMonthValue();
 
-        if(curMonth<12) mesi.remove(curMonth,12);
-        int creazioneMese=curAccount.getDataCreazione().toLocalDate().getMonthValue();
-        if(creazioneMese>1) mesi.remove(0,creazioneMese-1);
+        newYearSelected=curAccount.getDataCreazione().toLocalDate().getYear();
 
-        tableSpeseVariabiliHandlers.addAll(getDataForTable(datasource,nomeConto, curMonth, curMonth, this.curAccount.getDataCreazione().toLocalDate()));
+        for(int i=LocalDate.now().getYear(); i>=newYearSelected; i--){
+            anni.add(i);
+        }
+        newYearSelected=LocalDate.now().getYear();
+        setTheMonthsCombo();
+
+        tableSpeseVariabiliHandlers.addAll(getDataForTable(datasource,nomeConto, curMonth, curMonth, this.curAccount.getDataCreazione().toLocalDate(), LocalDate.now().getYear()));
         nomeContoLabel.setText(nomeConto);
         speseVarialibliGGList.addAll(dbmanagerSV.findBynomeContoandDate(this.nomeConto, Date.valueOf(LocalDate.now())));
         giornoLabel.setText(LocalDate.now().toString());
@@ -90,8 +101,40 @@ public class DetailedPageController {
         c.set(Calendar.MONTH, curMonth);
         maxDay = c.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-        SMG.setText(String.valueOf(Math.round(curAccount.getMonthltyIncome()*12/365*100)/100.0));
+        ObservableList<SpeseFisse> spesefisse=dbmanagerSF.findBynomeConto(nomeConto);
+        double totalespese= spesefisse.stream().mapToDouble(SpeseFisse::getAmount).sum();
+        tot=Math.round((curAccount.getMonthltyIncome()-totalespese)/maxDay*100)/100.0;
+        SMG.setText(String.valueOf(tot));
+        changeRisparmi();
+    }
 
+    public void setTheMonthsCombo(){
+        int annocreazione=curAccount.getDataCreazione().toLocalDate().getYear();
+        mesi=FXCollections.observableArrayList(finalMesi);
+        if(LocalDate.now().getYear()==newYearSelected && annocreazione==newYearSelected){
+            if(curMonth<12) mesi.remove(curMonth,12);
+            int creazioneMese=curAccount.getDataCreazione().toLocalDate().getMonthValue();
+            if(creazioneMese>1) mesi.remove(0,creazioneMese-1);
+        }
+        else if(LocalDate.now().getYear()==newYearSelected){
+            if(curMonth<12) mesi.remove(curMonth,12);
+        }
+        else if (newYearSelected == annocreazione){
+            int creazioneMese=curAccount.getDataCreazione().toLocalDate().getMonthValue();
+            if(creazioneMese>1) mesi.remove(0,creazioneMese-1);
+        }
+        mesiCombo.setItems(mesi);
+    }
+
+    public void changeRisparmi(){
+
+        int today=LocalDate.now().getDayOfMonth();
+        double totmese= (maxDay-today)*tot;
+        double value=Math.round((curAccount.getBilancio()-totmese+tot)*100)/100.0;
+        risparmi.setText(String.valueOf(value));
+        if(value > 0) risparmi.setStyle("-fx-textFill:Green");
+        else if(value==0) risparmi.setStyle("-fx-textFill:Yellow");
+        else risparmi.setStyle("-fx-textFill:Red");
     }
 
     @FXML
@@ -104,10 +147,12 @@ public class DetailedPageController {
 
         tableSpeseVariabiliHandlers=FXCollections.observableArrayList();
         speseVarialibliGGList=FXCollections.observableArrayList();
+        anni=FXCollections.observableArrayList();
 
         tableLittle.setItems(speseVarialibliGGList);
         tableBig.setItems(tableSpeseVariabiliHandlers);
         mesiCombo.setItems(mesi);
+        mesiCombo1.setItems(anni);
 
         tableBig.setOnMouseClicked(this::handleTableBigClick);
 
@@ -139,6 +184,7 @@ public class DetailedPageController {
             curAccount.setBilancio(curAccount.getBilancio()+selectedSpesa.getAmount());
             bilancioLabel.setText(String.valueOf(curAccount.getBilancio()));
             dbmanagerA.save(curAccount);
+            changeRisparmi();
         });
 
 
@@ -160,11 +206,19 @@ public class DetailedPageController {
             int giorno = tableBig.getSelectionModel().getSelectedItem().getGiorno();
             String newMonthSelected=mesiCombo.getValue();
             int mese= Month.valueOf(newMonthSelected).getValue();
-            LocalDate tmp=LocalDate.of(2024,mese,giorno);
+            LocalDate tmp=LocalDate.of(newYearSelected,mese,giorno);
             speseVarialibliGGList.clear();
             speseVarialibliGGList.addAll(dbmanagerSV.findBynomeContoandDate(this.nomeConto, Date.valueOf(tmp)));
             giornoLabel.setText(tmp.toString());
         }
+    }
+
+    @FXML
+    public void handleComboBox1() {
+        newYearSelected = mesiCombo1.getValue();
+        setTheMonthsCombo();
+        tableSpeseVariabiliHandlers.clear();
+        tableSpeseVariabiliHandlers.addAll(getDataForTable(datasource, nomeConto, curMonth, curMonth, this.curAccount.getDataCreazione().toLocalDate(), newYearSelected));
     }
 
     @FXML
@@ -174,8 +228,7 @@ public class DetailedPageController {
         c.set(Calendar.MONTH, curMonth);
         maxDay = c.getActualMaximum(Calendar.DAY_OF_MONTH);
         tableSpeseVariabiliHandlers.clear();
-        tableSpeseVariabiliHandlers.addAll(getDataForTable(datasource, nomeConto, mesi, curMonth, this.curAccount.getDataCreazione().toLocalDate()));
-
+        tableSpeseVariabiliHandlers.addAll(getDataForTable(datasource, nomeConto, mesi, curMonth, this.curAccount.getDataCreazione().toLocalDate(), newYearSelected));
     }
 
     public void handleEdit(SpeseVariabili selectedSpesa) throws IOException {
@@ -221,6 +274,7 @@ public class DetailedPageController {
             curAccount.setBilancio(curAccount.getBilancio()+oldValue-selectedSpesa.getAmount());
             bilancioLabel.setText(String.valueOf(curAccount.getBilancio()));
             dbmanagerA.save(curAccount);
+            changeRisparmi();
         }
     }
 
@@ -260,6 +314,7 @@ public class DetailedPageController {
             curAccount.setBilancio(curAccount.getBilancio()-val);
             bilancioLabel.setText(String.valueOf(curAccount.getBilancio()));
             dbmanagerA.save(curAccount);
+            changeRisparmi();
         }
     }
 
@@ -280,6 +335,7 @@ public class DetailedPageController {
             curAccount.setBilancio(curAccount.getBilancio()+curAccount.getMonthltyIncome()-totale);
             bilancioLabel.setText(String.valueOf(curAccount.getBilancio()));
             dbmanagerA.save(curAccount);
+            changeRisparmi();
         }
     }
 
@@ -302,6 +358,7 @@ public class DetailedPageController {
             curAccount.setBilancio(curAccount.getBilancio()+val);
             bilancioLabel.setText(String.valueOf(curAccount.getBilancio()));
             dbmanagerA.save(curAccount);
+            changeRisparmi();
         }
     }
 
@@ -324,6 +381,7 @@ public class DetailedPageController {
             curAccount.setBilancio(curAccount.getBilancio()-val);
             bilancioLabel.setText(String.valueOf(curAccount.getBilancio()));
             dbmanagerA.save(curAccount);
+            changeRisparmi();
         }
 
     }

@@ -14,7 +14,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import org.postgresql.ds.PGSimpleDataSource;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 
