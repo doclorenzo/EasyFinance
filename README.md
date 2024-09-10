@@ -5,8 +5,11 @@ Easy Finance è un software scritto in java che permette di gestire i propri con
 
 <h1>Struttura DB:</h1>
 Diagramma DB:
+
 ![Alt text](ReadMEresources/DB.png)
+
 Script di Creazione:
+
 ```sql
 CREATE TABLE IF NOT EXISTS public.account
 (
