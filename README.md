@@ -3,12 +3,12 @@
 
 Easy Finance è un software scritto in java che permette di gestire i propri conti in modo semplice ed efficace, senza ricadere in intili complicanze. Perciò si tratta di un'applicazione adatta a chi ha bisogno di gestire il denaro ad un livello basilare.
 
-##Struttura DB:
-###Diagramma DB:
+## Struttura DB:
+### Diagramma DB:
 
 ![Alt text](ReadMEresources/DB.png)
 
-###Script di Creazione:
+### Script di Creazione:
 
 ```sql
 CREATE TABLE IF NOT EXISTS public.account
@@ -52,24 +52,24 @@ ALTER TABLE IF EXISTS public.spesevariabili
     ON DELETE CASCADE;
 ```
 
-##UI
-##Pagina Iniziale
+## UI
+## Pagina Iniziale
 
 ![Alt text](ReadMEresources/initial.png)
 
-##Creazione Nuovo Conto
+## Creazione Nuovo Conto
 
 ![Alt text](ReadMEresources/creation.png)
 
-##Elimina Conto
+## Elimina Conto
 
 ![Alt text](ReadMEresources/Delete.png)
 
-##Modifica Conto
+## Modifica Conto
 
 ![Alt text](ReadMEresources/Edit.png)
 
-##Utilizzo del Conto
+## Utilizzo del Conto
 
 ![Alt text](ReadMEresources/Detailed.png)
 
