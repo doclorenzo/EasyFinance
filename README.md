@@ -54,38 +54,6 @@ ALTER TABLE IF EXISTS public.spesevariabili
 
 ## UML
 
-classDiagram
-direction BT
-class AbstractNewEdit
-class Account
-class AccountRepository
-class AddSpesaVariabileController
-class AutoDismissAlert
-class CreateNewCOntrollerDemo
-class DeleteAccountController
-class DetailedPageController
-class EditAccountController
-class InitialPage
-class InitialPageController
-class Repository~T, ID~ {
-<<Interface>>
-
-}
-class SpeseFisse
-class SpeseFisseRepository
-class SpeseVariabili
-class SpeseVariabiliRepository
-class TableSpeseVariabiliHandler
-class staticTableFiller
-
-AccountRepository  ..>  Repository~T, ID~ 
-CreateNewCOntrollerDemo  -->  AbstractNewEdit 
-EditAccountController  -->  AbstractNewEdit 
-SpeseFisseRepository  ..>  Repository~T, ID~ 
-SpeseVariabiliRepository  ..>  Repository~T, ID~ 
-
-
-
 ## UI
 ## Pagina Iniziale
 
@@ -125,6 +93,34 @@ Nella pagina di modifica del conto è possibile modificare un conto già esisten
 
 
 ## Utilizzo del Conto
+
+Questa pagina presenta diversi elementi:
+
+#### Tabella dei giorni del mese (SX)
+
+Sulla sinistra della pagina è presente un tabella il quale in base al mese ed anno selezionato, mostra i vari giorni del mese e la somma di tutte le spese effettuate in quel giorno. 
+Da questa tebella è possibile visualizzare tutti i giorni/mesi/anni che intercorrono dalla data di creazione del conto alla data corrente.
+
+#### Tebella delle spese giornaliere (DX)
+
+Nel centro della pagina è presente un uterione tabella il quale, premendo su un elemento della tabella di sinistra, permette di visualizzare in detteglio tutte le spese compiute in quella specifica data (gg/mm/aaaa) come riportato sopra. premendo il tasto "aggiungi" è possibile inserire una nuova spese e premendo con il tasto destro del mouse su una delle spese presenti si aprirà un menù a tendina dal quale sarà possibile modificare/eliminare la spesa selezionata.
+
+#### Stipendio/SpeseFisse
+
+Stipendio/SpeseFisse è un pulsante che permette di aggiungere al bilancio l'importo dell' +incassomensile e il -totaleSpeseFisse. La ragione per il quale l'aggiunta di questi importi avviene manualmente è che non è sempre certo stabilire una data precisa nel quale erogare automaticamente stipendio e spese fisse, perciò per una questione di comdità queste verranno inserite nel momento in cui l'utente le riceve in modo manuale.
+
+#### Pulsanti Deposita e Preleva
+
+Come si può immaginare sono pulsanti che permettono di aggiungere e/o prelevare un certo importo dal bilancio, nel caso in cui si ricevano dei soldi in più oltre allo stipendio fisso e per sistemare il bilancio in una fase preliminare in caso di spese precedenti alla creazione del conto.
+
+#### Bilancio totale e giornaliero
+
+Il bilancio totale mostra il bilancio globale del conto allo stato attuale.
+
+Il bilancio giornaliero rappresenta il tuo attuale Risparmio o Debito, cioè basandosi sulla spesa massima giornaliera che puoi affrontare per raggiugnere la fine del mese, mostra il tuo bilancio. Cioè se ad un certo giorno del mese corrente hai speso più soldi (o meno) di quelli che avresti dovuto basandocisi sul tuo stipendio e giorni trascorsi, ti verrà segnalato tramite "il Bilancio Giornaliero".
+è calcolato in questo modo:
+
+$ Bilancio - \[(Incasso_Mensile - Spese_Fisse)*(1 - Giorno_Corrente/Totale_Giorni_Del_Mese)] $
 
 ![Alt text](ReadMEresources/Detailed.png)
 
