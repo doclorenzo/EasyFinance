@@ -6,6 +6,7 @@ module com.manno.easyfinance {
     requires java.sql;
     requires org.postgresql.jdbc;
     requires java.naming;
+    requires java.desktop;
 
     opens com.manno.easyfinance to javafx.fxml;
     exports com.manno.easyfinance;

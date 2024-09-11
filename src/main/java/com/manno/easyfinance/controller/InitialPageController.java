@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -15,7 +17,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import org.postgresql.ds.PGSimpleDataSource;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.Optional;
 
@@ -32,6 +37,7 @@ public class InitialPageController {
     @FXML private ListView<String> accountListView;
     @FXML private VBox wrapper;
     @FXML private AnchorPane welcome;
+    @FXML private Hyperlink githublink;
     private ObservableList<Account> accounts;
     private ObservableList<String> accountsName;
     PGSimpleDataSource dataSource;
@@ -155,6 +161,11 @@ public class InitialPageController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    public void handleHyperLink() throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://github.com/doclorenzo/EasyFinance"));
     }
 
 }
