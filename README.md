@@ -1,4 +1,4 @@
-# EasyFinance
+# EasyFinance :coin:
 ![visitors](https://visitor-badge.laobi.icu/badge?page_id=doclorenzo.EasyFinance)
 
 Easy Finance è un software scritto in java che permette di gestire i propri conti in modo semplice ed efficace, senza ricadere in intili complicanze. Perciò si tratta di un'applicazione adatta a chi ha bisogno di gestire il denaro ad un livello basilare.
@@ -52,7 +52,7 @@ ALTER TABLE IF EXISTS public.spesevariabili
     ON DELETE CASCADE;
 ```
 
-## UML
+## UML :coffee:
 
 ![Alt text](ReadMEresources/UML.jpeg)
 
@@ -68,7 +68,7 @@ Le ultime due funzionalità sono la possibilità di premere su ```Account``` in 
 
 
 
-## Creazione Nuovo Conto
+## Creazione Nuovo Conto :heavy_plus_sign:
 
 Da questa pagina è possibile creare un nuovo conto.
 Viene richesto di inserire un nome con il quale verrà salvato l'account, un ```incasso mensile``` e delle ```spese fisse```, del quale viene richiesta ```descrizione``` (univoca) e ```importo```, premendo sulla tabella a sinistra sarà possibile rimuovere le spese fisse inserite
@@ -78,7 +78,7 @@ Viene richesto di inserire un nome con il quale verrà salvato l'account, un ```
 
 
 
-## Elimina Conto
+## Elimina Conto :heavy_minus_sign:
 
 In questa finestra è possibile eliminare un conto già esistente inserendo il suo ```nome conto```
 
@@ -87,7 +87,7 @@ In questa finestra è possibile eliminare un conto già esistente inserendo il s
 
 
 
-## Modifica Conto
+## Modifica Conto :heavy_division_sign:
 
 Nella pagina di modifica del conto è possibile modificare un conto già esistente. in particolare sarà possibile cambiare l' ```incasso mensile``` e le ```spese fisse```, le quali influenzeranno alcune azioni e menù nella pagina di utilizzo del conto
 
@@ -95,7 +95,7 @@ Nella pagina di modifica del conto è possibile modificare un conto già esisten
 
 
 
-## Utilizzo del Conto
+## Utilizzo del Conto :wrench:
 
 Questa pagina presenta diversi elementi:
 
@@ -120,7 +120,7 @@ Come si può immaginare sono pulsanti che permettono di aggiungere e/o prelevare
 
 Il bilancio totale mostra il bilancio globale del conto allo stato attuale.
 
-#### Risparmio o Debito
+#### Risparmio o Debito 
 
 Basandosi sulla spesa massima giornaliera che puoi affrontare per raggiugnere la fine del mese, mostra il tuo bilancio. Cioè se ad un certo giorno del mese hai speso più soldi (o meno) di quelli che avresti dovuto basandocisi sul tuo stipendio/spese fisse e giorni trascorsi, ti verrà segnalato l'importo di differenza nella sezione ```Risparmi/Debito```.
 
