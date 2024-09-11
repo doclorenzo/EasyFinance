@@ -54,7 +54,7 @@ ALTER TABLE IF EXISTS public.spesevariabili
 
 ## UML
 
-![Alt text](ReadMEresources/UML.jpg)
+![Alt text](ReadMEresources/UML.jpeg)
 
 
 ## UI
