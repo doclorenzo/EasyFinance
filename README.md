@@ -54,26 +54,37 @@ ALTER TABLE IF EXISTS public.spesevariabili
 
 ## UI
 ## Pagina Iniziale
+
 La Pagina iniziale visualizza i conti esistenti sull sinistra, presenta due bottoni per la creazione ed eliminazione di conti, premendo il il tasto destro del mouse su un elemento dlla lista dei conti sarà possibile accedere ad un menù per la modifica di esso.
 Le ultime due funzionalità sono la possibilità di premere su "Account" in alto a sinistra per tornare alla pagina iniziale in caso fosse necessario e di premere con il tasto sinistro del mouse su uno degli elemento della lista per accedere alla pagina di utilizzo di un account
+
+
 ![Alt text](ReadMEresources/Initial.png)
 
 
 
 ## Creazione Nuovo Conto
+
 Da questa pagina è possibile creare un nuovo conto.
-Viene richesto di inserire un nome con il quale verrà salvato l'account, un incasso mensile e delle spese fisse, del quale viene richiesta descrizione (univoca) e importo, premendo sull tabella a sinistra sarà possibile rimuovere le spese fisse inserite
+Viene richesto di inserire un nome con il quale verrà salvato l'account, un incasso mensile e delle spese fisse, del quale viene richiesta descrizione (univoca) e importo, premendo sulla tabella a sinistra sarà possibile rimuovere le spese fisse inserite
+
+
 ![Alt text](ReadMEresources/Creation.png)
 
 
 
 ## Elimina Conto
 
+In questa finestra è possibile eliminare un conto già esistente inserendo il suo nome
+
+
 ![Alt text](ReadMEresources/Delete.png)
 
 
 
 ## Modifica Conto
+
+Nella pagina di modifica del conto è possibile modificare un conto già esistente. in particolare sarà possibile cambiare l' incasso mensile e le spese fisse, le quali influenzeranno alcune azioni e menù nella pagina di utilizzo del conto
 
 ![Alt text](ReadMEresources/Edit.png)
 
