@@ -52,6 +52,40 @@ ALTER TABLE IF EXISTS public.spesevariabili
     ON DELETE CASCADE;
 ```
 
+## UML
+
+classDiagram
+direction BT
+class AbstractNewEdit
+class Account
+class AccountRepository
+class AddSpesaVariabileController
+class AutoDismissAlert
+class CreateNewCOntrollerDemo
+class DeleteAccountController
+class DetailedPageController
+class EditAccountController
+class InitialPage
+class InitialPageController
+class Repository~T, ID~ {
+<<Interface>>
+
+}
+class SpeseFisse
+class SpeseFisseRepository
+class SpeseVariabili
+class SpeseVariabiliRepository
+class TableSpeseVariabiliHandler
+class staticTableFiller
+
+AccountRepository  ..>  Repository~T, ID~ 
+CreateNewCOntrollerDemo  -->  AbstractNewEdit 
+EditAccountController  -->  AbstractNewEdit 
+SpeseFisseRepository  ..>  Repository~T, ID~ 
+SpeseVariabiliRepository  ..>  Repository~T, ID~ 
+
+
+
 ## UI
 ## Pagina Iniziale
 
