@@ -57,8 +57,8 @@ ALTER TABLE IF EXISTS public.spesevariabili
 ## UI
 ## Pagina Iniziale
 
-La Pagina iniziale visualizza i conti esistenti sull sinistra, presenta due bottoni per la creazione ed eliminazione di conti, premendo il il tasto destro del mouse su un elemento dlla lista dei conti sarà possibile accedere ad un menù per la modifica di esso.
-Le ultime due funzionalità sono la possibilità di premere su "Account" in alto a sinistra per tornare alla pagina iniziale in caso fosse necessario e di premere con il tasto sinistro del mouse su uno degli elemento della lista per accedere alla pagina di utilizzo di un account
+La Pagina iniziale visualizza i conti esistenti sulla sinistra, presenta due bottoni per la creazione ed eliminazione di conti, premendo il tasto destro del mouse su un elemento della lista dei conti sarà possibile accedere ad un menù per la modifica di esso.
+Le ultime due funzionalità sono la possibilità di premere su ```Account``` in alto a sinistra per tornare alla pagina iniziale e di premere con il tasto sinistro del mouse su uno degli elementi della lista per accedere alla pagina di utilizzo di un account.
 
 
 ![Alt text](ReadMEresources/Initial.png)
@@ -68,7 +68,7 @@ Le ultime due funzionalità sono la possibilità di premere su "Account" in alto
 ## Creazione Nuovo Conto
 
 Da questa pagina è possibile creare un nuovo conto.
-Viene richesto di inserire un nome con il quale verrà salvato l'account, un incasso mensile e delle spese fisse, del quale viene richiesta descrizione (univoca) e importo, premendo sulla tabella a sinistra sarà possibile rimuovere le spese fisse inserite
+Viene richesto di inserire un nome con il quale verrà salvato l'account, un ```incasso mensile``` e delle ```spese fisse```, del quale viene richiesta ```descrizione``` (univoca) e ```importo```, premendo sulla tabella a sinistra sarà possibile rimuovere le spese fisse inserite
 
 
 ![Alt text](ReadMEresources/Creation.png)
@@ -77,7 +77,7 @@ Viene richesto di inserire un nome con il quale verrà salvato l'account, un inc
 
 ## Elimina Conto
 
-In questa finestra è possibile eliminare un conto già esistente inserendo il suo nome
+In questa finestra è possibile eliminare un conto già esistente inserendo il suo ```nome conto```
 
 
 ![Alt text](ReadMEresources/Delete.png)
@@ -86,7 +86,7 @@ In questa finestra è possibile eliminare un conto già esistente inserendo il s
 
 ## Modifica Conto
 
-Nella pagina di modifica del conto è possibile modificare un conto già esistente. in particolare sarà possibile cambiare l' incasso mensile e le spese fisse, le quali influenzeranno alcune azioni e menù nella pagina di utilizzo del conto
+Nella pagina di modifica del conto è possibile modificare un conto già esistente. in particolare sarà possibile cambiare l' ```incasso mensile``` e le ```spese fisse```, le quali influenzeranno alcune azioni e menù nella pagina di utilizzo del conto
 
 ![Alt text](ReadMEresources/Edit.png)
 
@@ -103,11 +103,11 @@ Da questa tabella è possibile visualizzare tutti i giorni/mesi/anni che interco
 
 #### Tabella delle spese giornaliere (DX)
 
-Nel centro della pagina è presente un uterione tabella il quale, premendo su un elemento della tabella di sinistra, permette di visualizzare in detteglio tutte le spese compiute in quella specifica data (gg/mm/aaaa) come riportato sopra. premendo il tasto "aggiungi" è possibile inserire una nuova spese e premendo con il tasto destro del mouse su una delle spese presenti si aprirà un menù a tendina dal quale sarà possibile modificare/eliminare la spesa selezionata.
+Nel centro della pagina è presente un uterione tabella il quale, premendo su un elemento della tabella di sinistra, permette di visualizzare in detteglio tutte le spese compiute in quella specifica data (gg/mm/aaaa) come riportato sopra. premendo il tasto ```aggiungi``` è possibile inserire una nuova spesa e premendo con il tasto destro del mouse su una delle spese presenti si aprirà un menù a tendina dal quale sarà possibile ```modificare```/```eliminare``` la spesa selezionata.
 
 #### Stipendio/SpeseFisse
 
-Stipendio/SpeseFisse è un pulsante che permette di aggiungere al bilancio l'importo dell' +incassomensile e il -totaleSpeseFisse. La ragione per il quale l'aggiunta di questi importi avviene manualmente è che non è sempre certo stabilire una data precisa nel quale erogare automaticamente stipendio e spese fisse, perciò per una questione di comdità queste verranno inserite nel momento in cui l'utente le riceve in modo manuale.
+Stipendio/SpeseFisse è un pulsante che permette di aggiungere al bilancio l'importo dell' ```+ incassomensile``` e il ```- totaleSpeseFisse```. La ragione per il quale l'aggiunta di questi importi avviene manualmente è che non è sempre certo stabilire una data precisa nel quale erogare automaticamente stipendio e spese fisse, perciò per una questione di comdità queste verranno inserite nel momento in cui l'utente le riceve in modo manuale.
 
 #### Pulsanti Deposita e Preleva
 
