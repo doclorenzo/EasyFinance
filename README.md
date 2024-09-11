@@ -120,7 +120,7 @@ Il bilancio totale mostra il bilancio globale del conto allo stato attuale.
 Il bilancio giornaliero rappresenta il tuo attuale Risparmio o Debito, cioè basandosi sulla spesa massima giornaliera che puoi affrontare per raggiugnere la fine del mese, mostra il tuo bilancio. Cioè se ad un certo giorno del mese corrente hai speso più soldi (o meno) di quelli che avresti dovuto basandocisi sul tuo stipendio e giorni trascorsi, ti verrà segnalato tramite "il Bilancio Giornaliero".
 è calcolato in questo modo:
 
-$`\Bilancio-((Incasso_Mensile-Spese_Fisse)*(1-(Giorno_Corrente/Totale_Giorni_Del_Mese)))`$
+$`Bilancio-((IncassoMensile-SpeseFisse)*(1-(GiornoCorrente/TotaleGiorniDelMese)))`$
 
 ![Alt text](ReadMEresources/Detailed.png)
 
